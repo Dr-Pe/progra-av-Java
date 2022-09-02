@@ -19,10 +19,12 @@ public class Shining1 {
 	public static void main(String[] args) {
 
 		// Configuro archivo(s) de entrada para pruebas
-		final String pathin = "test_files/shining1_01.in";
+		final String pathin01 = "test_files/shining1_01.in";
+		final String pathin02 = "test_files/shining1_02.in";
 		
-		// Resolucion
-		System.out.println(procesarArchivosIn(pathin));
+		// Resolucion y escritura en pantalla
+		System.out.println("Ptos. sanados para caso 1: " + procesarArchivosIn(pathin01));
+		System.out.println("Ptos. sanados para caso 2: " + procesarArchivosIn(pathin02));
 
 	}
 	
@@ -63,21 +65,40 @@ public class Shining1 {
 		// Retorna la cantidad maxima de puntos que puede sanar un sanador
 		
 		int ptosSanados = 0; // acumulador
-		List<Integer[]> sanadovmagia = new ArrayList<Integer[]>();
+		List<Integer[]> sanaciones = new ArrayList<Integer[]>();
 		
+		// Se llena la lista sanaciones con todas las posibles sanaciones, cuanto sanan, y cuanto cuestan
 		for(int i=0; i<vidaInicial.length; i++) {
-			int sanado = Math.min(vidaInicial[i] - vidaActual[i], MAX_PTOS_A_SANAR);
-			int coste = (distancia[i] == 1) ? COSTE_D1 : COSTE_D2;
+			int aSanar = vidaInicial[i] - vidaActual[i];
 			
-			sanadovmagia.add(new Integer[] {sanado, coste});
+			while(aSanar > MAX_PTOS_A_SANAR) {
+				int coste = (distancia[i] == 1) ? COSTE_D1 : COSTE_D2;
+				
+				sanaciones.add(new Integer[] {MAX_PTOS_A_SANAR, coste});
+				aSanar -= MAX_PTOS_A_SANAR;
+			}
+			
+			int sanado = Math.min(aSanar, MAX_PTOS_A_SANAR);
+			int coste = (distancia[i] == 1) ? COSTE_D1 : COSTE_D2;
+			sanaciones.add(new Integer[] {sanado, coste});
 		}
-		// Ahora ordeno la lista de acuerdp a un ratio ptos_a_sanar / coste_en_magia
-		Collections.sort(sanadovmagia, (i1, i2) -> (i1[0]/i1[1] - i2[0]/i2[0]));
-		int i=0;
-		while(magia > 0 && i<sanadovmagia.size()) {
-			ptosSanados += sanadovmagia.get(i)[0];
-			magia -= sanadovmagia.get(i)[1];
-			i++;
+		// Ahora se ordena la lista de acuerdo a un ratio ptos_a_sanar / coste_en_magia
+		Collections.sort(sanaciones, (i1, i2) -> {
+			float r1 = (float)((Integer[])i1)[0] / (float)((Integer[])i1)[1];
+			float r2 = (float)((Integer[])i2)[0] / (float)((Integer[])i2)[1];
+			float dif = r2 - r1;
+			
+			return (dif > 0) ? 1 : ((dif == 0) ? 0 : -1);
+		});
+		// Sanese quien pueda (mientras haya magia)
+		for(int i=0; i<sanaciones.size(); i++) {
+			if(magia >= sanaciones.get(i)[1]) {
+				ptosSanados += sanaciones.get(i)[0];
+				magia -= sanaciones.get(i)[1];
+			}
+			else if(magia == 0) {
+				break;
+			}
 		}
 		
 		return ptosSanados;

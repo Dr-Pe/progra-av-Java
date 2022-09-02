@@ -1,0 +1,1 @@
+Shining1.java tiene una resolución No-OOP del ejercicio shining1. Shining2.java tendrá algo similar para shining2. El resto planeo que sea una resolución OOP para ambos.
