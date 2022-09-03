@@ -2,7 +2,7 @@
  * Resolución de la consigna de la OIA "shining1" sin usar un paradigma totalmente OOP.
  */
 
-package game;
+package tests;
 
 import java.io.File;
 import java.util.ArrayList;
