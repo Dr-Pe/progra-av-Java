@@ -4,8 +4,8 @@ package geom;
 
 public class Rectangulo extends Figura {
 	
-	private double ancho;	// b1
-	private double alto;	// b2
+	private double ancho;
+	private double alto;
 	
 	public Rectangulo(Punto centro, double ancho, double alto) {
 		super(centro);
@@ -13,7 +13,7 @@ public class Rectangulo extends Figura {
 		this.alto = alto;
 	}
 
-	@Override	// e
+	@Override
 	public boolean equals(Object obj) {
 		if(this == obj)
 			return true;
@@ -28,7 +28,6 @@ public class Rectangulo extends Figura {
 				&& Double.doubleToLongBits(ancho) == Double.doubleToLongBits(other.ancho);
 	}
 	
-	@Override	// e
 	public double area() {
 		return ancho * alto;
 	}
@@ -36,6 +35,18 @@ public class Rectangulo extends Figura {
 	@Override
 	public String toString() {
 		return "R[x=" + ancho + ", y=" + alto + ", c = " + centro + "]";
+	}
+
+	@Override
+	public void dibujar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

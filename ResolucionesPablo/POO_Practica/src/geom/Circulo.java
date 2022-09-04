@@ -4,14 +4,14 @@ package geom;
 
 public class Circulo extends Figura {
 
-	private double r;	// c
+	private double r;
 	
 	public Circulo(Punto centro, double radio) {
 		super(centro);
 		this.r = radio;
 	}
 
-	@Override	// e
+	@Override
 	public boolean equals(Object obj) {
 		if(this == obj)
 			return true;
@@ -25,7 +25,6 @@ public class Circulo extends Figura {
 		return Double.doubleToLongBits(r) == Double.doubleToLongBits(other.r);
 	}
 	
-	@Override	// e
 	public double area() {
 		return Math.PI * r * r;
 	}
@@ -33,6 +32,18 @@ public class Circulo extends Figura {
 	@Override
 	public String toString() {
 		return "C[r = " + r + ", c = " + centro + "]";
+	}
+
+	@Override
+	public void dibujar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void rotar() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
