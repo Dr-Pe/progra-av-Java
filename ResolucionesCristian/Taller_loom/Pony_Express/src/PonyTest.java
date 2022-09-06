@@ -13,15 +13,17 @@ public class PonyTest {
 		Assert.assertEquals(3, Pony_Mensajero.jinetes(new int[] {33, 8, 16, 47, 30, 30, 46}));
 		Assert.assertEquals(3, Pony_Mensajero.jinetes(new int[] {51, 51, 51}));
 	}
+	
 	@Test
 	public void caso_1_jineteUnico() {
 		Assert.assertEquals(1, Pony_Mensajero.jinetes(new int[] {50, 50}));
 	}
+	
+	//hasta 100 corta primer jinete, arranca jinete 2 en 1-1-1-1
 	@Test
 	public void caso_2_EstacionesCortas() {
 		Assert.assertEquals(2, Pony_Mensajero.jinetes(new int[] {10,10,10,10,10,10,10,10,10,10,1,1,1,1,1,1,1,1}));
 	}
-	//hasta 100 corta primer jinete, arranca jinete 2 en 1-1-1-1
 	
 
 }
