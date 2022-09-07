@@ -60,7 +60,8 @@ public class PruebasSumo {
 	try {
 	    byte[] expectedBytes = Files.readAllBytes(
 				    Paths.get("src/test/resources/sumo_expected.out"));
-	    byte[] actualBytes = Files.readAllBytes(Paths.get("src/test/resources/sumo.out"));
+	    byte[] actualBytes = Files.readAllBytes(
+				    Paths.get("src/test/resources/sumo.out"));
 
 	    String expected = new String(expectedBytes, StandardCharsets.UTF_8);
 	    String actual = new String(actualBytes, StandardCharsets.UTF_8);
