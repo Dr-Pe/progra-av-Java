@@ -22,7 +22,7 @@ public class Shining1_vOOP {
 	final String pathin02 = "test_files/shining1_02.in";
 	
 	// Resolucion y escritura en pantalla
-//	System.out.println("Ptos. sanados para caso 1: " + procesarArchivosIn(pathin01));
+	System.out.println("Ptos. sanados para caso 1: " + procesarArchivosIn(pathin01));
 	System.out.println("Ptos. sanados para caso 2: " + procesarArchivosIn(pathin02));
 	
     }
