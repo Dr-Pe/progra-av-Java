@@ -1,0 +1,18 @@
+package colgantes1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Colgantes1 {
+
+    public static void main(String[] args) {
+	
+	ArchivoColgantes colgantesIn = new ArchivoColgantes("test_files/colgantes.in");
+	Map<Integer, Integer> cantColgantes = new HashMap<Integer, Integer>();
+	
+	
+	
+
+    }
+
+}
