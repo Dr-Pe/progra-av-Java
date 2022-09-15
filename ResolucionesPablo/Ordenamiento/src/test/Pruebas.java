@@ -6,37 +6,70 @@ import algoritmos.OrdenEnteros;
 
 public class Pruebas {
 
+    private static final int[] ARRAY_SIMPLE = new int[] { 2, 1, 4, 3, 5 };
+    private static final int[] ARRAY_SIMPLE_ORD = new int[] { 1, 2, 3, 4, 5 };
+    private static final int[] ARRAY_REP = new int[] { 2, 2, 1, 4, 3, 3, 5 };
+    private static final int[] ARRAY_REP_ORD = new int[] { 1, 2, 2, 3, 3, 4, 5 };
+
+
     public static void main(String[] args) {
 
-	int arr[] = new int[] { 2, 2, 1, 4, 3, 3, 5 };
-	OrdenEnteros.quicksort(arr);
+	int arr[] = ARRAY_REP;
+	OrdenEnteros.insertionsort(arr);
 
 	for(int i = 0; i < arr.length; i++)
 	    System.out.println(arr[i]);
 
     }
+    
+    /*
+     * Quicksort
+     */
 
     @Test
     public void pruebaQuicksortSimple() {
 
-	int arr[] = new int[] { 2, 1, 4, 3, 5 };
-	Assert.assertArrayEquals(new int[] { 1, 2, 3, 4, 5 },
-				OrdenEnteros.quicksort(arr));
+	int arr[] = ARRAY_SIMPLE;
+	Assert.assertArrayEquals(ARRAY_SIMPLE_ORD, OrdenEnteros.quicksort(arr));
     }
 
     @Test
     public void pruebaQuicksortRepetidos() {
 
-	int arr[] = new int[] { 2, 2, 1, 4, 3, 3, 5 };
-	Assert.assertArrayEquals(new int[] { 1, 2, 2, 3, 3, 4, 5 },
-				OrdenEnteros.quicksort(arr));
+	int arr[] = ARRAY_REP;
+	Assert.assertArrayEquals(ARRAY_REP_ORD, OrdenEnteros.quicksort(arr));
     }
 
     @Test
     public void pruebaQuicksortVacio() {
 
-	int arr[] = new int[] { };
-	Assert.assertArrayEquals(new int[] { }, OrdenEnteros.quicksort(arr));
+	int arr[] = new int[] {};
+	Assert.assertArrayEquals(new int[] {}, OrdenEnteros.quicksort(arr));
+    }
+    
+    /*
+     * Insertionsort
+     */
+    
+    @Test
+    public void pruebaInsertionsortSimple() {
+
+	int arr[] = ARRAY_SIMPLE;
+	Assert.assertArrayEquals(ARRAY_SIMPLE_ORD, OrdenEnteros.insertionsort(arr));
+    }
+
+    @Test
+    public void pruebaInsertionsortRepetidos() {
+
+	int arr[] = ARRAY_REP;
+	Assert.assertArrayEquals(ARRAY_REP_ORD, OrdenEnteros.insertionsort(arr));
+    }
+
+    @Test
+    public void pruebaInsertionsortVacio() {
+
+	int arr[] = new int[] {};
+	Assert.assertArrayEquals(new int[] {}, OrdenEnteros.insertionsort(arr));
     }
 
 }

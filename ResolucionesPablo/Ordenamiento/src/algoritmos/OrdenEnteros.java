@@ -2,12 +2,14 @@ package algoritmos;
 
 public class OrdenEnteros {
 
+    public static int[] mergesort(int[] arr) {
+	return arr;
+    }
+    
     public static int[] quicksort(int[] arr) {
 	// Wrapper con la implementacion de quicksort qeu devuelve el array ya ordenado
-	// (a pesar de ordenar en el lugar) para permitir concatenacion de funciones
-
-	if(arr.length < 2)
-	    return arr;
+	// (a pesar de ordenar en el lugar) para permitir concatenacion de funciones.
+	// Quicksort no es estable.
 
 	quicksortInterno(arr, 0, arr.length - 1);
 	return arr;
@@ -37,6 +39,20 @@ public class OrdenEnteros {
 	intercambiar(arr, iMenor + 1, fin);
 
 	return iMenor + 1;
+    }
+
+    public static int[] insertionsort(int[] arr) {
+	// Algoritmo de insertion-sort
+
+	for(int i = 1; i < arr.length; i++) {
+	    int j = i - 1;
+	    while(j > 0 && arr[j] < arr[j - 1]) {
+		intercambiar(arr, j, j - 1);
+		j--;
+	    }
+	}
+
+	return arr;
     }
 
     private static void intercambiar(int[] arr, int idxA, int idxB) {
