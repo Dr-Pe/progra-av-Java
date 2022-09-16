@@ -14,12 +14,37 @@ public class Pruebas {
 
     public static void main(String[] args) {
 
-	int arr[] = ARRAY_REP;
-	OrdenEnteros.insertionsort(arr);
+	int arr[] = ARRAY_SIMPLE;
+	OrdenEnteros.mergesort(arr);
 
 	for(int i = 0; i < arr.length; i++)
 	    System.out.println(arr[i]);
 
+    }
+    
+    /*
+     * Mergesort
+     */
+    
+    @Test
+    public void pruebaMergesortSimple() {
+
+	int arr[] = ARRAY_SIMPLE;
+	Assert.assertArrayEquals(ARRAY_SIMPLE_ORD, OrdenEnteros.mergesort(arr));
+    }
+
+    @Test
+    public void pruebaMergesortRepetidos() {
+
+	int arr[] = ARRAY_REP;
+	Assert.assertArrayEquals(ARRAY_REP_ORD, OrdenEnteros.mergesort(arr));
+    }
+
+    @Test
+    public void pruebaMergesortVacio() {
+
+	int arr[] = new int[] {};
+	Assert.assertArrayEquals(new int[] {}, OrdenEnteros.mergesort(arr));
     }
     
     /*

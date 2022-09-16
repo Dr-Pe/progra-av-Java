@@ -3,11 +3,67 @@ package algoritmos;
 public class OrdenEnteros {
 
     public static int[] mergesort(int[] arr) {
+	// Wrapper con la implementacion de merge-sort
+
+	mergesortInterno(arr, 0, arr.length - 1);
+
 	return arr;
     }
-    
+
+    private static void mergesortInterno(int[] arr, int ini, int fin) {
+	// Algoritmo recursivo de merge-sort
+	
+	if(ini >= fin)
+	    return;
+
+	int mid = (ini + fin) / 2;
+	mergesortInterno(arr, ini, mid);
+	mergesortInterno(arr, mid + 1, fin);
+	fusionar(arr, ini, mid, fin);
+    }
+
+    private static void fusionar(int[] arr, int ini, int mid, int fin) {
+	// Utilidad para merge sort que fusiona dos sub-arrays de arr de manera ordenada
+	
+	int[] izq = new int[mid - ini + 1];
+	int[] der = new int[fin - mid];
+
+	for(int i = 0; i < izq.length; i++)
+	    izq[i] = arr[ini + i];
+	for(int i = 0; i < der.length; i++)
+	    der[i] = arr[mid + i + 1];
+
+	int i = ini;
+	int j = 0;
+	int z = 0;
+
+	while(j < izq.length && z < der.length) {
+	    if(izq[j] < der[z]) {
+		arr[i] = izq[j];
+		j++;
+	    } else {
+		arr[i] = der[z];
+		z++;
+	    }
+	    i++;
+	}
+
+	while(j < izq.length) {
+	    arr[i] = izq[j];
+	    j++;
+	    i++;
+	}
+
+	while(z < der.length) {
+	    arr[i] = der[z];
+	    z++;
+	    i++;
+	}
+
+    }
+
     public static int[] quicksort(int[] arr) {
-	// Wrapper con la implementacion de quicksort qeu devuelve el array ya ordenado
+	// Wrapper con la implementacion de quicksort que devuelve el array ya ordenado
 	// (a pesar de ordenar en el lugar) para permitir concatenacion de funciones.
 	// Quicksort no es estable.
 
