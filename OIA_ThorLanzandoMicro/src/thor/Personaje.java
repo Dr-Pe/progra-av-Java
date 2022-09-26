@@ -11,12 +11,10 @@ public class Personaje {
 	fuerza = f;
     }
 
-    public float getAltura() {
-	return altura;
-    }
+    public float calcularDistancia(Objeto o) {
+	// Calcula distancia a la que el Personaje puede lanzar el Objeto o
 
-    public float getFuerza() {
-	return fuerza;
+	return (this.altura * this.fuerza) / o.getPeso();
     }
 
 }
