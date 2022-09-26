@@ -1,14 +1,13 @@
+package thor;
 
-public Simulacion {
-
-    private Lanzamiento;
+public class Simulacion {
 
     public static void main(String args[]) {
-        Lanzamiento thor = new Lanzamiento();
+	Lanzamiento thor = new Lanzamiento();
 
-        thor.leer(args[0]);
-        thor.resolver();
-        thor.escribir();
+	thor.leer(args[0]);
+	thor.resolver();
+	thor.escribir();
     }
 
 }

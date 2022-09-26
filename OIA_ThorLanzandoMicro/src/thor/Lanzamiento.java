@@ -5,18 +5,18 @@ import java.util.List;
 
 public class Lanzamiento {
 
-	private List<Personaje> pjs;
-	private List<Objeto> objs;
-	private float distancia;
-	private int exitos;
+    private List<Personaje> pjs;
+    private List<Objeto> objs;
+    private float distancia;
+    private int exitos;
 
-	public Lanzamiento() {
-		pjs = new ArrayList<Personaje>();
-		objs = new ArrayList<Objeto>();
-		exitos=0;
-	}
+    public Lanzamiento() {
+	pjs = new ArrayList<Personaje>();
+	objs = new ArrayList<Objeto>();
+	exitos = 0;
+    }
 
-	@Deprecated
+    @Deprecated
     public static int thor(String path) {
 	// Recibe la direccion del archivo .in y devuelve la cantidad de lanzamientos
 	// exitosos. Complejidad O(n**2)
@@ -31,34 +31,38 @@ public class Lanzamiento {
 	// Función principal
 	for(Personaje pj:pjs) {
 	    for(Objeto obj:objs) {
-			if(pj.calcularDistancia(obj) >= d)
-		    	cantExitos++;
+		if(pj.calcularDistancia(obj) >= d)
+		    cantExitos++;
 	    }
 	}
 
 	return cantExitos;
     }
 
-	public void leer(String path) {
-		Archivo thorIn = new Archivo(path);
-		this.distancia = thorIn.cargarArchivo(this.pjs, this.objs);
-	}
+    public void leer(String path) {
+	Archivo thorIn = new Archivo(path);
+	this.distancia = thorIn.cargarArchivo(this.pjs, this.objs);
+    }
 
-	public void resolver() {
-		// O(n**2)
+    public void resolver() {
+	// O(n**2)
 
-		for(Personaje pj : pjs) {
-			if(pj.calcularDistancia(new Objeto(1)) >= distancia) {
-				for(Objeto obj : objs) {
-					if(pj.calcularDistancia(obj) >= distancia)
-						cantExitos++;
-				}
-			}
+	for(Personaje pj:pjs) {
+	    if(pj.calcularDistancia(new Objeto(1)) >= distancia) {
+		for(Objeto obj:objs) {
+		    if(pj.calcularDistancia(obj) >= distancia)
+			this.exitos++;
 		}
+	    }
 	}
+    }
 
-	public void escribir() {
-		System.out.println(this.exitos + "exitos");
-	}
+    public void escribir() {
+	System.out.println(this.exitos + "exitos");
+    }
+
+    public int getExitos() {
+	return this.exitos;
+    }
 
 }
