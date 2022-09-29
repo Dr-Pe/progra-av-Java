@@ -1,11 +1,29 @@
 package test;
 
+import tdas.ColaPrioritariaEnteros;
 import tdas.MonticuloEnteros;
 
 public class Main {
 
     public static void main(String[] args) {
 
+	pruebaColaPrioritaria();
+    }
+
+    public static void pruebaColaPrioritaria() {
+	ColaPrioritariaEnteros c = new ColaPrioritariaEnteros(10);
+
+	c.encolar(1);
+	c.encolar(15);
+	c.encolar(2);
+	c.encolar(7);
+
+	int topPriority = c.desencolar(); // 15
+
+	System.out.println("Mayor prioridad: " + topPriority);
+    }
+
+    public static void pruebaMonticulo() {
 	MonticuloEnteros m = new MonticuloEnteros(10);
 
 	m.agregar(5);

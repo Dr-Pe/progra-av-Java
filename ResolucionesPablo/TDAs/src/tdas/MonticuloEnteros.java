@@ -13,6 +13,11 @@ public class MonticuloEnteros {
     }
 
     public boolean agregar(int elem) {
+	/*
+	 * Tantas iteraciones como niveles de altura, que en arboles binarios siguen
+	 * h = Math.ceil(log2(n)) -> Complejidad O(log(n))
+	 */
+
 	if(this.cantElem >= this.tam)
 	    return false;
 
@@ -32,6 +37,11 @@ public class MonticuloEnteros {
     }
 
     public Integer sacar() {
+	/*
+	 * Tantas iteraciones como niveles de altura, que en arboles binarios siguen
+	 * h = Math.ceil(log2(n)) -> Complejidad O(log(n))
+	 */
+
 	if(this.estaVacio())
 	    return null;
 
