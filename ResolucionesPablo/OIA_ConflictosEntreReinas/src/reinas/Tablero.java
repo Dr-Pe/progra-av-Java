@@ -27,12 +27,15 @@ public class Tablero {
 	for(int n = 0; n < this.N; n++) {
 	    this.conflictosPorFila(n); 	  // O(n)
 	    this.conflictosPorColumna(n); // O(n)
-	} // 2 * O(n**2)
-//	this.conflictosPorDiagonal(0, 0); // O(n)
-//	for(int d = 1; d < this.N - 1; d++) {
-//	    this.conflictosPorDiagonal(0, d); // O(n)
-//	    this.conflictosPorDiagonal(d, 0); // O(n)
-//	} // f(n) = 2n - 3
+	} // 2(n**2)
+	this.conflictosPorDiagonal(0, 0); 	     // O(n)
+	this.conflictosPorDiagonalInversa(0, N - 1); // O(n) // O(2n)
+	for(int d = 1; d < this.N - 1; d++) {
+	    this.conflictosPorDiagonal(0, d); 	     	      // O(n)
+	    this.conflictosPorDiagonal(d, 0); 	     	      // O(n)
+	    this.conflictosPorDiagonalInversa(0, d); 	      // O(n)
+	    this.conflictosPorDiagonalInversa(d, this.N - 1); // O(n)
+	} // 4n * (n - 2) = 4(n**2) - 8n -> O(n**2)
     }
 
     public void conflictosPorFila(int fila) {
@@ -85,7 +88,6 @@ public class Tablero {
 	// Donde fila y columna son los del elemento superior izquierdo de la diagonal
 
 	int i = 0;
-
 	while(fila + i < this.N && col + i < this.N) {
 	    if(this.matriz[fila + i][col + i] != null) {
 		// Primer Reina de la columna encontrada
@@ -100,6 +102,31 @@ public class Tablero {
 		    // Agrego conflictos a las reinas en juego
 		    rb.addConflicto(this.matriz[fila + i][col + i]);
 		    this.matriz[fila + i][col + i].addConflicto(rb);
+		    i--; // Ahora se calcula desde la segunda Reina encontrada
+		}
+	    }
+	    i++;
+	}
+    }
+
+    public void conflictosPorDiagonalInversa(int fila, int col) {
+	// Donde fila y columna son los del elemento superior derecho de la diagonal
+
+	int i = 0;
+	while(fila + i < this.N && col - i >= 0) {
+	    if(this.matriz[fila + i][col - i] != null) {
+		// Primer Reina de la columna encontrada
+		Reina rb = this.matriz[fila + i][col - i];
+		// Busco otra Reina
+		i++;
+		while(fila + i < this.N && col - i > 0
+					&& this.matriz[fila + i][col - i] == null)
+		    i++;
+		// Si encontró otra antes de salirse del Tablero...
+		if(fila + i < this.N && col - i > 0) {
+		    // Agrego conflictos a las reinas en juego
+		    rb.addConflicto(this.matriz[fila + i][col - i]);
+		    this.matriz[fila + i][col - i].addConflicto(rb);
 		    i--; // Ahora se calcula desde la segunda Reina encontrada
 		}
 	    }

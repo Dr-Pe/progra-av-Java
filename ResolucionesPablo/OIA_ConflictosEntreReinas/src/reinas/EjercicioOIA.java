@@ -10,7 +10,7 @@ public class EjercicioOIA {
     /*
      * Opcion 1: Calcular conflictos en cada fila, columna, o diagonal. En una matriz de
      * nxn hay n filas y columnas y 2n - 3 diagonales, por lo que esta opcion tendría una
-     * complejidad de f(n) = 2(n**2) + 2n - 3 -> O(n**2), con 1 <= n <= 10000.
+     * complejidad de f(n) = 4(n**2) - 8n -> O(n**2), con 1 <= n <= 10000.
      * 
      * Opcion 2: Calcular conflictos por cada Reina con las demas m-i reinas donde i
      * comienza en 1 y termina en m. Entonces la complejidad sería de
@@ -25,7 +25,7 @@ public class EjercicioOIA {
 
 	EjercicioOIA caso1 = new EjercicioOIA();
 
-	caso1.cargarArchivo("files/reinas02.in");
+	caso1.cargarArchivo("files/conflictos02.in");
 	caso1.procesarDatos();
 	caso1.grabarArchivo();
 
@@ -43,7 +43,7 @@ public class EjercicioOIA {
 	    this.tablero = new Tablero(n);
 
 	    for(int i = 0; i < m; i++) {
-		Reina r = new Reina(sc.nextInt(), sc.nextInt());
+		Reina r = new Reina(sc.nextInt(), sc.nextInt(), i + 1);
 		this.tablero.add(r);
 		this.reinas.add(r);
 	    }
@@ -64,8 +64,9 @@ public class EjercicioOIA {
     public void grabarArchivo() {
 	System.out.println();
 	for(Reina r : this.reinas) {
+	    System.out.print(r.getConflictos().length);
 	    for(Object c : r.getConflictos())
-		System.out.print(c + " ");
+		System.out.print(" " + c);
 	    System.out.print("\n");
 	}
     }

@@ -1,23 +1,20 @@
 package reinas;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Reina {
-
-    private static int cantidad = 0;
 
     public int id;
     private int fila;
     private int columna;
-    private List<Integer> conflictos; // Ids de las otras Reinas con las que hay conflicto
+    private Set<Integer> conflictos; // Ids de las otras Reinas con las que hay conflicto
 
-    Reina(int f, int c) {
-	Reina.cantidad++;
-	this.id = cantidad;
+    public Reina(int f, int c, int i) {
+	this.id = i;
 	this.fila = f;
 	this.columna = c;
-	this.conflictos = new ArrayList<Integer>();
+	this.conflictos = new HashSet<Integer>();
     }
 
     public int getFila() {
@@ -32,8 +29,14 @@ public class Reina {
 	return this.conflictos.add(r.id);
     }
 
-    public Object[] getConflictos() {
-	return this.conflictos.toArray();
+    public int[] getConflictos() {
+	int[] ret = new int[this.conflictos.size()];
+	int i = 0;
+	for(Object id : this.conflictos.toArray()) {
+	    ret[i] = (int) id;
+	    i++;
+	}
+	return ret;
     }
 
 }
