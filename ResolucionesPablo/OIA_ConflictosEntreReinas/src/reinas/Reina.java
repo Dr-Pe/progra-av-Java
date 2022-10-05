@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Reina {
 
-    public int id;
+    private int id;
     private int fila;
     private int columna;
     private Set<Integer> conflictos; // Ids de las otras Reinas con las que hay conflicto

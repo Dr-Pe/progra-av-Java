@@ -24,21 +24,23 @@ public class Tablero {
     }
 
     public void calcularConflictos() {
+	// f(n) = 6(n**2) - 6n ---> O(n**2)
+
 	for(int n = 0; n < this.N; n++) {
 	    this.conflictosPorFila(n); 	  // O(n)
 	    this.conflictosPorColumna(n); // O(n)
-	} // 2(n**2)
+	} // n * 2n -> 2(n**2)
 	this.conflictosPorDiagonal(0, 0); 	     // O(n)
-	this.conflictosPorDiagonalInversa(0, N - 1); // O(n) // O(2n)
+	this.conflictosPorDiagonalInversa(0, N - 1); // O(n)
 	for(int d = 1; d < this.N - 1; d++) {
 	    this.conflictosPorDiagonal(0, d); 	     	      // O(n)
 	    this.conflictosPorDiagonal(d, 0); 	     	      // O(n)
 	    this.conflictosPorDiagonalInversa(0, d); 	      // O(n)
 	    this.conflictosPorDiagonalInversa(d, this.N - 1); // O(n)
-	} // 4n * (n - 2) = 4(n**2) - 8n -> O(n**2)
+	} // 4n * (n - 2) -> 4(n**2) - 8n
     }
 
-    public void conflictosPorFila(int fila) {
+    private void conflictosPorFila(int fila) {
 	int j = 0;
 
 	while(j < this.N) {
@@ -61,7 +63,7 @@ public class Tablero {
 	}
     }
 
-    public void conflictosPorColumna(int col) {
+    private void conflictosPorColumna(int col) {
 	int i = 0;
 
 	while(i < this.N) {
@@ -84,7 +86,7 @@ public class Tablero {
 	}
     }
 
-    public void conflictosPorDiagonal(int fila, int col) {
+    private void conflictosPorDiagonal(int fila, int col) {
 	// Donde fila y columna son los del elemento superior izquierdo de la diagonal
 
 	int i = 0;
@@ -109,7 +111,7 @@ public class Tablero {
 	}
     }
 
-    public void conflictosPorDiagonalInversa(int fila, int col) {
+    private void conflictosPorDiagonalInversa(int fila, int col) {
 	// Donde fila y columna son los del elemento superior derecho de la diagonal
 
 	int i = 0;
