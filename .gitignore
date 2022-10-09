@@ -4,5 +4,5 @@
 # Directories
 */.metadata/
 */bin/
-*/.settings/
+*.settings/
 */target/
