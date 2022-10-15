@@ -1,0 +1,13 @@
+[mapa]
+dimensiones = [9, 4]
+tipo = "clasico"
+
+[terrenos]
+TerrenoPuerta = [[7, 1, 1]]
+
+[personajes]
+PersonajeJugable.posicion = [1, 2]
+PersonajeJugable.direccion = "NORTE"
+
+[items]
+LLave = [[4, 2]]
