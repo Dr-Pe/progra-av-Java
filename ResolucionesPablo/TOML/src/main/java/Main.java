@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.List;
 
 import org.tomlj.Toml;
 import org.tomlj.TomlArray;
@@ -19,8 +20,8 @@ public class Main {
 		System.out.println(terreno);
 		TomlArray datosTerrenos = terrenos.getArray(terreno);
 		for(int i = 0; i < datosTerrenos.size(); i++) {
-		    TomlArray datosTerreno = datosTerrenos.getArray(i);
-		    System.out.println(datosTerreno.get(0));
+		    List<Object> datosTerreno = datosTerrenos.getArray(i).toList();
+		    System.out.println(datosTerreno);
 		}
 	    }
 
