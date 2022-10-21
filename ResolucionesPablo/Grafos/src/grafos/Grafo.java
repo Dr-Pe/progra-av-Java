@@ -15,10 +15,19 @@ public class Grafo {
 	this.cantNodos = adyacencias.length;
     }
 
+    // IMPLEMENTAR FLOYD Y FORD
+
     public int[][] dijkstra(int ini) {
-	int[] distancia = new int[cantNodos]; 	     // Distancias desde ini hasta cada nodo
+	/*
+	 * El algoritmo de Dijkstra halla los caminos más cortos desde un nodo
+	 * origen a todos los demás en cualquier grafo ponderado (dirigido o no)
+	 */
+
+	int[] distancia = new int[cantNodos]; 	     // Distancias desde ini
+					      	     // hasta cada nodo
 	int[] predecesor = new int[cantNodos];       // Vector de predecesores
-	boolean[] visitado = new boolean[cantNodos]; // Si el nodo ya fue visitado
+	boolean[] visitado = new boolean[cantNodos]; // Si el nodo ya fue
+						     // visitado
 
 	for(int w = 0; w < cantNodos; w++) {
 	    if(adyacencias[ini][w] != INFINITO) {
@@ -49,7 +58,8 @@ public class Grafo {
     }
 
     private Integer menorNoVisitado(int[] dis, boolean[] vis) {
-	// Devuelve el indice del nodo con menor distancia que aún no haya sido visitado, null si todos fueron visitados
+	// Devuelve el indice del nodo con menor distancia que aún no haya sido
+	// visitado, null si todos fueron visitados
 
 	Integer idxMenor = null;
 
