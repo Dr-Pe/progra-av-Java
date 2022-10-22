@@ -9,7 +9,7 @@ import grafos.Grafo;
 
 public class PruebasGrafos {
 
-    private Grafo g1 = new Grafo(new int[][] { { -1, 7, 3, -1 }, { -1, -1, -1, 2 },
+    private Grafo g1 = new Grafo(new Integer[][] { { -1, 7, 3, -1 }, { -1, -1, -1, 2 },
 	    { -1, 2, -1, 8 }, { -1, -1, -1, -1 } });
 
     @Test
