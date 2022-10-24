@@ -72,10 +72,10 @@ public class PruebasGrafos {
     @Test
     public void floydWarshallDistanciasG1() {
 	G1.floydWarshall();
-	Integer[] distanciasNodo0 = G1.getDistancias()[0];
-	Integer[] distanciasNodo1 = G1.getDistancias()[1];
-	Integer[] distanciasNodo2 = G1.getDistancias()[2];
-	Integer[] distanciasNodo3 = G1.getDistancias()[3];
+	Integer[] distanciasNodo0 = G1.distancias()[0];
+	Integer[] distanciasNodo1 = G1.distancias()[1];
+	Integer[] distanciasNodo2 = G1.distancias()[2];
+	Integer[] distanciasNodo3 = G1.distancias()[3];
 
 	Assert.assertArrayEquals(G1.dijkstra(0)[0], distanciasNodo0);
 	Assert.assertArrayEquals(G1.dijkstra(1)[0], distanciasNodo1);

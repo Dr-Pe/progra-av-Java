@@ -33,12 +33,13 @@ public class Grafo {
 	this.distancias[vi][vf] = peso;
     }
 
-    // IMPLEMENTAR FORD
-    // IMPLEMENTAR PRIM, KRUSKAL
+    // TODO: IMPLEMENTAR FORD
+    // TODO: IMPLEMENTAR PRIM, KRUSKAL
 
     public void floydWarshall() {
 	/*
-	 * Por ahora calcula matriz de distancias, no sé aún como calcular caminos
+	 * Calcula la menor distancia entre dos nodos para cada nodo de un grafo ponderado y
+	 * dirigido
 	 */
 
 	for(int k = 0; k < orden; k++) {
@@ -56,23 +57,15 @@ public class Grafo {
 	}
     }
 
-    public String caminoToString() {
-	String r = "";
-	for(int i = 0; i < orden; i++) {
-	    for(int j = 0; j < orden; j++) {
-		r += distancias[i][j] != INFINITO
-					? String.format(" %3d ", distancias[i][j])
-					: " inf ";
-	    }
-	    r += "\n\n";
-	}
-	return r;
-    }
-
     public Integer[][] dijkstra(int ini) {
 	/*
 	 * El algoritmo de Dijkstra halla los caminos más cortos desde un nodo
-	 * origen a todos los demás en cualquier grafo ponderado (dirigido o no)
+	 * origen a todos los demás en cualquier grafo ponderado (dirigido o no).
+	 * 
+	 * Los pesos deben ser siempre positivos.
+	 * 
+	 * in: Nodo a partir del cual calcular
+	 * out: vector de distancia minima y vector de precedencia (camino).
 	 */
 
 	Integer[] distancia = new Integer[orden];  // Distancias desde ini hasta
@@ -142,7 +135,7 @@ public class Grafo {
 	return r;
     }
 
-    public Integer[][] getDistancias() {
+    public Integer[][] distancias() {
 	return this.distancias;
     }
 
@@ -154,6 +147,19 @@ public class Grafo {
 		r += adyacencias[i][j] != INFINITO
 					? String.format(" %3d ", adyacencias[i][j])
 					: " inf ";
+	    }
+	    r += "\n\n";
+	}
+	return r;
+    }
+
+    public static String matrizToString(Integer[][] m) {
+	// Auxiliar para representar cualquier matriz de Integer de las que uso en Grafo
+
+	String r = "";
+	for(int i = 0; i < m.length; i++) {
+	    for(int j = 0; j < m.length; j++) {
+		r += m[i][j] != INFINITO ? String.format(" %3d ", m[i][j]) : " inf ";
 	    }
 	    r += "\n\n";
 	}

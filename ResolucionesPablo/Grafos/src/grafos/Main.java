@@ -8,13 +8,10 @@ public class Main {
 		{ null, 2, null, 8 }, { null, null, null, null } };
 	Grafo g = new Grafo(mat);
 
-	System.out.println("\nCaminos pre-FloydWarshall\n\n" + g.caminoToString());
+	System.out.println("Distancias entre nodos:\n"
+				+ Grafo.matrizToString(g.distancias()));
 	g.floydWarshall();
-	System.out.println("Caminos pos-FloydWarshall\n\n" + g.caminoToString());
-
-	g.agregarArista(0, 2, 1);
-
-	g.floydWarshall();
-	System.out.println("Caminos pos-FloydWarshall\n\n" + g.caminoToString());
+	System.out.println("Distancias luego de aplicar Floyd-Warshall:\n"
+				+ Grafo.matrizToString(g.distancias()));
     }
 }
