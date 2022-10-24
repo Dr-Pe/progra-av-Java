@@ -9,28 +9,38 @@ import grafos.Grafo;
 
 public class PruebasGrafos {
 
-    private Grafo g1 = new Grafo(new Integer[][] { { -1, 7, 3, -1 }, { -1, -1, -1, 2 },
-	    { -1, 2, -1, 8 }, { -1, -1, -1, -1 } });
+    private Grafo G1 = new Grafo(new Integer[][] { { null, 7, 3, null },
+	    { null, null, null, 2 }, { null, 2, null, 8 }, { null, null, null, null } });
+
+    /*
+     * G1:
+     * 
+     * (0)-3->(2)
+     * (0)-7->(1)
+     * (1)-2->(3)
+     * (2)-2->(1)
+     * (2)-8->(3)
+     */
 
     @Test
     public void pesoG1() {
-	int p0 = g1.peso(0, 0); // -1
-	int p1 = g1.peso(0, 1); // 7
-	int p2 = g1.peso(2, 1); // 2
-	int p3 = g1.peso(1, 2); // -1, no es bidireccional
+	Integer p0 = G1.peso(0, 0); // 0
+	Integer p1 = G1.peso(0, 1); // 7
+	Integer p2 = G1.peso(2, 1); // 2
+	Integer p3 = G1.peso(1, 2); // null, no es bidireccional
 
-	Assert.assertEquals(-1, p0);
-	Assert.assertEquals(7, p1);
-	Assert.assertEquals(2, p2);
-	Assert.assertEquals(-1, p3);
+	Assert.assertEquals(Integer.valueOf(0), p0);
+	Assert.assertEquals(Integer.valueOf(7), p1);
+	Assert.assertEquals(Integer.valueOf(2), p2);
+	Assert.assertEquals(null, p3);
     }
 
     @Test
     public void sucesoresG1() {
-	List<Integer> s0 = g1.sucesores(0);
-	List<Integer> s1 = g1.sucesores(1);
-	List<Integer> s2 = g1.sucesores(2);
-	List<Integer> s3 = g1.sucesores(3);
+	List<Integer> s0 = G1.sucesores(0);
+	List<Integer> s1 = G1.sucesores(1);
+	List<Integer> s2 = G1.sucesores(2);
+	List<Integer> s3 = G1.sucesores(3);
 
 	Assert.assertEquals(Integer.valueOf(1), s0.get(0));
 	Assert.assertEquals(Integer.valueOf(2), s0.get(1));
@@ -41,6 +51,36 @@ public class PruebasGrafos {
 	Assert.assertEquals(Integer.valueOf(3), s2.get(1));
 
 	Assert.assertEquals(0, s3.size());
+    }
+
+    @Test
+    public void dijkstraNodo0G1() {
+	Integer[][] r = G1.dijkstra(0);
+
+	Assert.assertArrayEquals(new Integer[] { 0, 5, 3, 7 }, r[0]);
+	Assert.assertArrayEquals(new Integer[] { 0, 2, 0, 1 }, r[1]);
+    }
+
+    @Test
+    public void dijkstraNodo2G1() {
+	Integer[][] r = G1.dijkstra(2);
+
+	Assert.assertArrayEquals(new Integer[] { null, 2, 0, 4 }, r[0]);
+	Assert.assertArrayEquals(new Integer[] { null, 2, 2, 1 }, r[1]);
+    }
+
+    @Test
+    public void floydWarshallDistanciasG1() {
+	G1.floydWarshall();
+	Integer[] distanciasNodo0 = G1.getDistancias()[0];
+	Integer[] distanciasNodo1 = G1.getDistancias()[1];
+	Integer[] distanciasNodo2 = G1.getDistancias()[2];
+	Integer[] distanciasNodo3 = G1.getDistancias()[3];
+
+	Assert.assertArrayEquals(G1.dijkstra(0)[0], distanciasNodo0);
+	Assert.assertArrayEquals(G1.dijkstra(1)[0], distanciasNodo1);
+	Assert.assertArrayEquals(G1.dijkstra(2)[0], distanciasNodo2);
+	Assert.assertArrayEquals(G1.dijkstra(3)[0], distanciasNodo3);
     }
 
 }

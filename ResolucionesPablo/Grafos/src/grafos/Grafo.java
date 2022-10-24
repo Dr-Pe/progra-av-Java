@@ -7,32 +7,50 @@ public class Grafo {
 
     private final static Integer INFINITO = null;
 
+    private int orden;	// Cantidad de vértices o nodos
     private Integer[][] adyacencias;
-    private Integer[][] camino;
+    private Integer[][] distancias;
+
+    public Grafo(int orden) {
+	this.orden = orden;
+	this.adyacencias = new Integer[orden][orden];
+	this.distancias = new Integer[orden][orden];
+    }
 
     public Grafo(Integer[][] adyacencias) {
+	this.orden = adyacencias.length;
 	this.adyacencias = adyacencias;
-	this.camino = new Integer[adyacencias.length][adyacencias.length];
-	for(int i = 0; i < adyacencias.length; i++) {
+	this.distancias = new Integer[orden][orden];
+	for(int i = 0; i < orden; i++) {
 	    this.adyacencias[i][i] = 0;
-	    for(int j = 0; j < adyacencias.length; j++)
-		camino[i][j] = this.adyacencias[i][j];
+	    for(int j = 0; j < orden; j++)
+		distancias[i][j] = this.adyacencias[i][j];
 	}
     }
 
-    // IMPLEMENTAR FLOYD Y FORD
+    public void agregarArista(int vi, int vf, int peso) {
+	this.adyacencias[vi][vf] = peso;
+	this.distancias[vi][vf] = peso;
+    }
+
+    // IMPLEMENTAR FORD
+    // IMPLEMENTAR PRIM, KRUSKAL
 
     public void floydWarshall() {
-	for(int k = 0; k < camino.length; k++) {
-	    for(int i = 0; i < camino.length; i++) {
-		if(camino[i][k] != null) {
-		    for(int j = 0; j < camino.length; j++)
-			if(camino[k][j] != null) {
-			    if(camino[i][j] == null || camino[i][j] > (camino[i][k]
-						    + camino[k][j]))
-				camino[i][j] = camino[i][k] + camino[k][j];
-			}
+	/*
+	 * Por ahora calcula matriz de distancias, no sé aún como calcular caminos
+	 */
 
+	for(int k = 0; k < orden; k++) {
+	    for(int i = 0; i < orden; i++) {
+		if(distancias[i][k] != null) {
+		    for(int j = 0; j < orden; j++)
+			if(distancias[k][j] != null) {
+			    if(distancias[i][j] == null
+						    || distancias[i][j] > (distancias[i][k]
+									    + distancias[k][j]))
+				distancias[i][j] = distancias[i][k] + distancias[k][j];
+			}
 		}
 	    }
 	}
@@ -40,9 +58,10 @@ public class Grafo {
 
     public String caminoToString() {
 	String r = "";
-	for(int i = 0; i < camino.length; i++) {
-	    for(int j = 0; j < camino.length; j++) {
-		r += camino[i][j] != INFINITO ? String.format(" %3d ", camino[i][j])
+	for(int i = 0; i < orden; i++) {
+	    for(int j = 0; j < orden; j++) {
+		r += distancias[i][j] != INFINITO
+					? String.format(" %3d ", distancias[i][j])
 					: " inf ";
 	    }
 	    r += "\n\n";
@@ -56,14 +75,14 @@ public class Grafo {
 	 * origen a todos los demás en cualquier grafo ponderado (dirigido o no)
 	 */
 
-	Integer[] distancia = new Integer[adyacencias.length]; 	// Distancias desde ini hasta
-							       	// cada nodo
-	Integer[] predecesor = new Integer[adyacencias.length]; // Vector de predecesores
-	boolean[] visitado = new boolean[adyacencias.length];   // Si el nodo ya fue visitado
+	Integer[] distancia = new Integer[orden];  // Distancias desde ini hasta
+						   // cada nodo
+	Integer[] predecesor = new Integer[orden]; // Vector de predecesores
+	boolean[] visitado = new boolean[orden];   // Si el nodo ya fue visitado
 
-	for(int w = 0; w < adyacencias.length; w++) {
+	for(int w = 0; w < orden; w++) {
 	    distancia[w] = peso(ini, w);
-	    predecesor[w] = ini;
+	    predecesor[w] = distancia[w] != null ? ini : null;
 	}
 
 	distancia[ini] = 0;
@@ -90,7 +109,7 @@ public class Grafo {
 
 	Integer idxMenor = null;
 
-	for(int v = 0; v < adyacencias.length; v++) {
+	for(int v = 0; v < orden; v++) {
 	    if(!vis[v] && dis[v] != null) {
 		idxMenor = v;
 		break;
@@ -100,7 +119,7 @@ public class Grafo {
 	if(idxMenor == null)
 	    return null;
 
-	for(int v = idxMenor + 1; v < adyacencias.length; v++) {
+	for(int v = idxMenor + 1; v < orden; v++) {
 	    if(dis[v] != null && dis[v] < dis[idxMenor] && !vis[v])
 		idxMenor = v;
 	}
@@ -116,18 +135,22 @@ public class Grafo {
 	// Devuelve una lista de los nodos accesibles desde el padre
 
 	List<Integer> r = new ArrayList<Integer>();
-	for(int i = 0; i < adyacencias.length; i++) {
-	    if(adyacencias[padre][i] != INFINITO)
+	for(int i = 0; i < orden; i++) {
+	    if(adyacencias[padre][i] != INFINITO && padre != i)
 		r.add(i);
 	}
 	return r;
     }
 
+    public Integer[][] getDistancias() {
+	return this.distancias;
+    }
+
     @Override
     public String toString() {
 	String r = "";
-	for(int i = 0; i < adyacencias.length; i++) {
-	    for(int j = 0; j < adyacencias.length; j++) {
+	for(int i = 0; i < orden; i++) {
+	    for(int j = 0; j < orden; j++) {
 		r += adyacencias[i][j] != INFINITO
 					? String.format(" %3d ", adyacencias[i][j])
 					: " inf ";
