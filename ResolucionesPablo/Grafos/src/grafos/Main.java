@@ -6,12 +6,10 @@ public class Main {
 
 	Integer[][] mat = new Integer[][] { { null, 7, 3, null }, { null, null, null, 2 },
 		{ null, 2, null, 8 }, { null, null, null, null } };
-	Grafo g = new Grafo(mat);
+	GrafoDirigido GD = new GrafoDirigido(mat);
+	GrafoNoDirigido GND = new GrafoNoDirigido(mat);
 
-	System.out.println("Distancias entre nodos:\n"
-				+ Grafo.matrizToString(g.distancias()));
-	g.floydWarshall();
-	System.out.println("Distancias luego de aplicar Floyd-Warshall:\n"
-				+ Grafo.matrizToString(g.distancias()));
+	System.out.println(GD);
+	System.out.println(GND);
     }
 }

@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import grafo.GrafoBosque;
 
+// TODO: Más casos de prueba (sin dragones, por ejemplo)
+
 public class Resolucion {
 
     private String pathIn;

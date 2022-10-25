@@ -3,13 +3,13 @@ package grafos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grafo {
+public abstract class Grafo {
 
-    private final static Integer INFINITO = null;
+    protected final static Integer INFINITO = null;
 
-    private int orden;	// Cantidad de vértices o nodos
-    private Integer[][] adyacencias;
-    private Integer[][] distancias;
+    protected int orden; // Cantidad de vértices o nodos
+    protected Integer[][] adyacencias;
+    protected Integer[][] distancias;
 
     public Grafo(int orden) {
 	this.orden = orden;
@@ -34,28 +34,6 @@ public class Grafo {
     }
 
     // TODO: IMPLEMENTAR FORD
-    // TODO: IMPLEMENTAR PRIM, KRUSKAL
-
-    public void floydWarshall() {
-	/*
-	 * Calcula la menor distancia entre dos nodos para cada nodo de un grafo ponderado y
-	 * dirigido
-	 */
-
-	for(int k = 0; k < orden; k++) {
-	    for(int i = 0; i < orden; i++) {
-		if(distancias[i][k] != null) {
-		    for(int j = 0; j < orden; j++)
-			if(distancias[k][j] != null) {
-			    if(distancias[i][j] == null
-						    || distancias[i][j] > (distancias[i][k]
-									    + distancias[k][j]))
-				distancias[i][j] = distancias[i][k] + distancias[k][j];
-			}
-		}
-	    }
-	}
-    }
 
     public Integer[][] dijkstra(int ini) {
 	/*
