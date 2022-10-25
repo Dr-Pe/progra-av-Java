@@ -26,4 +26,12 @@ public class GrafoNoDirigido extends Grafo {
 
     // TODO: IMPLEMENTAR PRIM, KRUSKAL
 
+    public void prim() {
+	/*
+	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo
+	 */
+
+
+    }
+
 }
