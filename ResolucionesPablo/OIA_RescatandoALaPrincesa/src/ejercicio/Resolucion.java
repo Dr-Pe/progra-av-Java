@@ -17,7 +17,7 @@ public class Resolucion {
     private GrafoBosque bosque;
 
     private Integer[][] caminoPrincipe;
-    private Integer[][][] caminosDragones;
+    private List<Integer[][]> caminosDragones;
 
     public static void main(String[] args) {
 
@@ -32,7 +32,7 @@ public class Resolucion {
     public Resolucion(String pathIn) {
 	this.pathIn = pathIn;
 	this.leerArchivoIn();
-	this.caminosDragones = new Integer[clarosConDragones.length][][];
+	this.caminosDragones = new ArrayList<Integer[][]>();
     }
 
     private void leerArchivoIn() {
@@ -52,11 +52,17 @@ public class Resolucion {
 
 	    clarosConDragones = new int[d];
 	    for(int i = 0; i < d; i++)
-		clarosConDragones[i] = sc.nextInt();
+		clarosConDragones[i] = sc.nextInt() - 1;
 
 	    bosque = new GrafoBosque(c);
-	    for(int i = 0; i < s; i++)
-		bosque.agregarSendero(sc.nextInt() - 1, sc.nextInt() - 1, sc.nextInt());
+	    for(int i = 0; i < s; i++) {
+		// Los caminos son bidireccionales
+		int ci = sc.nextInt() - 1;
+		int cf = sc.nextInt() - 1;
+		int l = sc.nextInt();
+		bosque.agregarSendero(ci, cf, l);
+		bosque.agregarSendero(cf, ci, l);
+	    }
 
 
 	} catch(Exception e) {
@@ -84,7 +90,8 @@ public class Resolucion {
 
 	// Si algun Dragón llega al Nodo antes o a la vez que el Principe...
 	for(Integer i : recorridoPrincipe) {
-	    if(caminoPrincipe[0][i] >= menorPesoDragon(i))
+	    Integer mpd = menorPesoDragon(i);
+	    if(mpd != null && caminoPrincipe[0][i] >= mpd)
 		return "INTERCEPTADO";
 	}
 
@@ -101,7 +108,7 @@ public class Resolucion {
 	// Calcula con Dijkstra el camino de c/Dragon
 
 	for(int d = 0; d < clarosConDragones.length; d++) {
-	    this.caminosDragones[d] = bosque.dijkstra(d);
+	    this.caminosDragones.add(bosque.dijkstra(clarosConDragones[d]));
 	}
     }
 
@@ -120,13 +127,15 @@ public class Resolucion {
     }
 
     private Integer menorPesoDragon(Integer claro) {
-	// Devuelve el menor peso (tiempo) entre todos los dragones para llegar a 'claro'
+	// Devuelve el menor peso (tiempo) entre todos los dragones para llegar a 'claro', null si
+	// no puede llegar
 
-	Integer menor = this.caminosDragones[0][0][claro];
+	Integer menor = this.caminosDragones.get(0)[0][claro];
 
 	for(int i = 1; i < this.clarosConDragones.length; i++) {
-	    if(this.caminosDragones[i][0][claro] < menor)
-		menor = this.caminosDragones[i][0][claro];
+	    if(this.caminosDragones.get(i)[0][claro] != null
+				    && this.caminosDragones.get(i)[0][claro] < menor)
+		menor = this.caminosDragones.get(i)[0][claro];
 	}
 
 	return menor;
