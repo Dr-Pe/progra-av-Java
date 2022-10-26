@@ -1,6 +1,11 @@
 package grafos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GrafoNoDirigido extends Grafo {
+
+    private GrafoNoDirigido mst; // Minimum Spanning Tree
 
     public GrafoNoDirigido(int orden) {
 	super(orden);
@@ -26,15 +31,20 @@ public class GrafoNoDirigido extends Grafo {
 
     // TODO: IMPLEMENTAR PRIM, KRUSKAL
 
-    public GrafoNoDirigido prim() {
+    public int prim() {
 	/*
-	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo y lo
-	 * devuelve en forma de Grafo
+	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo y
+	 * devuelve su peso total. También carga this.mst.
 	 */
 
-	GrafoNoDirigido r = new GrafoNoDirigido(this.orden);
+	this.mst = new GrafoNoDirigido(this.orden);
 
-	return r;
+	int pesoTotal = 0;
+	List<Integer> visitados = new ArrayList<Integer>();
+
+
+
+	return pesoTotal;
     }
 
 

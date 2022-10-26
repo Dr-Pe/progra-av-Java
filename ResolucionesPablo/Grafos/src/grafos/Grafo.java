@@ -69,7 +69,7 @@ public abstract class Grafo {
 	Integer[] distancia = new Integer[orden];  // Distancias desde ini hasta
 						   // cada nodo
 	Integer[] predecesor = new Integer[orden]; // Vector de predecesores
-	boolean[] visitado = new boolean[orden];   // Si el nodo ya fue visitado
+	boolean[] visitado = new boolean[orden];   // Si el nodo [v] ya fue visitado
 
 	for(int w = 0; w < orden; w++) {
 	    distancia[w] = peso(ini, w);
@@ -94,7 +94,7 @@ public abstract class Grafo {
 	return new Integer[][] { distancia, predecesor };
     }
 
-    private Integer menorNoVisitado(Integer[] dis, boolean[] vis) {
+    protected Integer menorNoVisitado(Integer[] dis, boolean[] vis) {
 	// Devuelve el indice del nodo con menor distancia que aún no haya sido
 	// visitado, null si todos fueron visitados
 
