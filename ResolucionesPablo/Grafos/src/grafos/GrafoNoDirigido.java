@@ -26,12 +26,17 @@ public class GrafoNoDirigido extends Grafo {
 
     // TODO: IMPLEMENTAR PRIM, KRUSKAL
 
-    public void prim() {
+    public GrafoNoDirigido prim() {
 	/*
-	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo
+	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo y lo
+	 * devuelve en forma de Grafo
 	 */
 
+	GrafoNoDirigido r = new GrafoNoDirigido(this.orden);
 
+	return r;
     }
+
+
 
 }

@@ -11,5 +11,6 @@ public class Main {
 
 	System.out.println(GD);
 	System.out.println(GND);
+
     }
 }
