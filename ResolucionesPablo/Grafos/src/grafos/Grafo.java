@@ -94,7 +94,7 @@ public abstract class Grafo {
 	return new Integer[][] { distancia, predecesor };
     }
 
-    protected Integer menorNoVisitado(Integer[] dis, boolean[] vis) {
+    private Integer menorNoVisitado(Integer[] dis, boolean[] vis) {
 	// Devuelve el indice del nodo con menor distancia que aún no haya sido
 	// visitado, null si todos fueron visitados
 

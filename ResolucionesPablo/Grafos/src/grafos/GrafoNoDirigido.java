@@ -42,11 +42,58 @@ public class GrafoNoDirigido extends Grafo {
 	int pesoTotal = 0;
 	List<Integer> visitados = new ArrayList<Integer>();
 
+	int nodoIni = 0;
+	visitados.add(nodoIni);
+	Integer[] menor = menorAristaNodoNoVisitado(nodoIni, visitados);
 
+	while(visitados.size() < orden) {
+	    visitados.add(menor[1]);
+	    this.mst.agregarArista(menor[0], menor[1], menor[2]);
+	    pesoTotal += menor[2];
+	    menor = null;
+	    for(Integer nodo : visitados) {
+		Integer[] posibleMenor = menorAristaNodoNoVisitado(nodo, visitados);
+		if(menor == null || (posibleMenor != null && posibleMenor[2] < menor[2]))
+		    menor = posibleMenor;
+	    }
+	}
 
 	return pesoTotal;
     }
 
+    private Integer[] menorAristaNodoNoVisitado(int ni, List<Integer> vis) {
+	// Devuelve { nodoInicial, nodoFinal, pesoArista } del arista con menor peso entre ni y otro
+	// nodo
 
+	Integer nodoFinal = null;
+	Integer menorPeso = null;
+
+	for(int nf = 0; nf < orden; nf++) {
+	    if(this.adyacencias[ni][nf] != null && !vis.contains(nf)) {
+		nodoFinal = nf;
+		menorPeso = this.adyacencias[ni][nf];
+		break;
+	    }
+	}
+
+	if(nodoFinal == null)
+	    return null;
+
+	for(int nf = nodoFinal; nf < orden; nf++) {
+	    if(this.adyacencias[ni][nf] != null && !vis.contains(nf)
+				    && this.adyacencias[ni][nf] < menorPeso) {
+		nodoFinal = nf;
+		menorPeso = this.adyacencias[ni][nf];
+	    }
+	}
+
+	return new Integer[] { ni, nodoFinal, menorPeso };
+    }
+
+    public GrafoNoDirigido getMST() {
+	if(this.mst == null)
+	    this.prim();
+	return this.mst;
+    }
 
 }

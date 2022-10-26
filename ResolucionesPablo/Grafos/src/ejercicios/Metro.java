@@ -24,7 +24,6 @@ public class Metro {
      */
 
     private GrafoNoDirigido plano;
-    private GrafoNoDirigido mst;
 
     public static void main(String[] args) {
 
@@ -44,8 +43,6 @@ public class Metro {
 	// Devuelve la cantidad de puentes estrictamente necesarios
 
 	int pesoTotal = plano.prim();
-
-
 	return pesoTotal;
     }
 
