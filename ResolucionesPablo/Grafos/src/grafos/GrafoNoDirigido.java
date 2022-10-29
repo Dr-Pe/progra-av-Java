@@ -69,7 +69,7 @@ public class GrafoNoDirigido extends Grafo {
 		if(menor == null || (posibleMenor != null && posibleMenor[2] < menor[2]))
 		    menor = posibleMenor;
 	    } // O(visitados x n x n) ~= O(n^3)
-	} // O(n^4)? Me quedó ineficiente
+	} // O(n^4)? Me quedó re ineficiente
 
 	return pesoTotal;
     }

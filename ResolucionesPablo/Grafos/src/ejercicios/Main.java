@@ -1,4 +1,7 @@
-package grafos;
+package ejercicios;
+
+import grafos.GrafoDirigido;
+import grafos.GrafoNoDirigido;
 
 public class Main {
 
