@@ -42,7 +42,7 @@ public class Metro {
     private int resolver() {
 	// Devuelve la cantidad de puentes estrictamente necesarios
 
-	int pesoTotal = plano.prim();
+	int pesoTotal = plano.kruskal();
 	return pesoTotal;
     }
 

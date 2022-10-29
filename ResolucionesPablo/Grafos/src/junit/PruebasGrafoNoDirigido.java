@@ -74,31 +74,38 @@ public class PruebasGrafoNoDirigido {
 	Assert.assertArrayEquals(new Integer[] { 2, 2, 2, 1 }, r[1]);
     }
 
-    @Test
-    public void primPesoFinalGND1() {
-	int peso = GND1.prim();
+    // TODO: Probar FloydWarshall acá tmb
 
+//    @Test
+//    public void primPesoFinalGND1() {
+//	int peso = GND1.prim();
+//	Assert.assertEquals(7, peso);
+//    }
+//
+//    @Test
+//    public void primMST_GND1() {
+//	GrafoNoDirigido MST_GND1 = GND1.getMST();
+//
+//	List<Integer> s0 = MST_GND1.sucesores(0);
+//	List<Integer> s1 = MST_GND1.sucesores(1);
+//	List<Integer> s2 = MST_GND1.sucesores(2);
+//	List<Integer> s3 = MST_GND1.sucesores(3);
+//
+//	Assert.assertEquals(Integer.valueOf(2), s0.get(0));
+//
+//	Assert.assertEquals(Integer.valueOf(2), s1.get(0));
+//	Assert.assertEquals(Integer.valueOf(3), s1.get(1));
+//
+//	Assert.assertEquals(Integer.valueOf(0), s2.get(0));
+//	Assert.assertEquals(Integer.valueOf(1), s2.get(1));
+//
+//	Assert.assertEquals(Integer.valueOf(1), s3.get(0));
+//    }
+
+    @Test
+    public void kruskalPesoFinalGND1() {
+	int peso = GND1.kruskal();
 	Assert.assertEquals(7, peso);
-    }
-
-    @Test
-    public void primMST_GND1() {
-	GrafoNoDirigido MST_GND1 = GND1.getMST();
-
-	List<Integer> s0 = MST_GND1.sucesores(0);
-	List<Integer> s1 = MST_GND1.sucesores(1);
-	List<Integer> s2 = MST_GND1.sucesores(2);
-	List<Integer> s3 = MST_GND1.sucesores(3);
-
-	Assert.assertEquals(Integer.valueOf(2), s0.get(0));
-
-	Assert.assertEquals(Integer.valueOf(2), s1.get(0));
-	Assert.assertEquals(Integer.valueOf(3), s1.get(1));
-
-	Assert.assertEquals(Integer.valueOf(0), s2.get(0));
-	Assert.assertEquals(Integer.valueOf(1), s2.get(1));
-
-	Assert.assertEquals(Integer.valueOf(1), s3.get(0));
     }
 
 }

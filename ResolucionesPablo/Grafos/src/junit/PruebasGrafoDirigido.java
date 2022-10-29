@@ -71,11 +71,11 @@ public class PruebasGrafoDirigido {
 
     @Test
     public void floydWarshallDistanciasGD1() {
-	GD1.floydWarshall();
-	Integer[] distanciasNodo0 = GD1.distancias()[0];
-	Integer[] distanciasNodo1 = GD1.distancias()[1];
-	Integer[] distanciasNodo2 = GD1.distancias()[2];
-	Integer[] distanciasNodo3 = GD1.distancias()[3];
+	Integer[][] distancias = GD1.floydWarshall();
+	Integer[] distanciasNodo0 = distancias[0];
+	Integer[] distanciasNodo1 = distancias[1];
+	Integer[] distanciasNodo2 = distancias[2];
+	Integer[] distanciasNodo3 = distancias[3];
 
 	Assert.assertArrayEquals(GD1.dijkstra(0)[0], distanciasNodo0);
 	Assert.assertArrayEquals(GD1.dijkstra(1)[0], distanciasNodo1);

@@ -17,4 +17,16 @@ public class Arista implements Comparable<Arista> {
 	return this.peso - o.peso;
     }
 
+    public int getVi() {
+	return this.vi;
+    }
+
+    public int getVf() {
+	return this.vf;
+    }
+
+    public int getPeso() {
+	return this.peso;
+    }
+
 }

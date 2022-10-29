@@ -7,39 +7,57 @@ public abstract class Grafo {
 
     protected final static Integer INFINITO = null;
 
-    protected int orden; // Cantidad de vértices o nodos
-    protected Integer[][] adyacencias;
-    protected Integer[][] distancias;
+    protected int orden; 		// Cantidad de vértices o nodos
+    protected List<Arista> aristas;	// Lista de aristas del Grafo
+    protected Arista[][] adyacencias;	// Las mismas aristas de la lista pero en sus respectivas
+				     	// posiciones en la matriz de adyacencia
 
     public Grafo(int orden) {
 	this.orden = orden;
-	this.adyacencias = new Integer[orden][orden];
-	this.distancias = new Integer[orden][orden];
+	this.aristas = new ArrayList<Arista>();
+	this.adyacencias = new Arista[orden][orden];
     }
 
     public Grafo(Integer[][] adyacencias) {
 	this.orden = adyacencias.length;
-	this.adyacencias = adyacencias;
-	this.distancias = new Integer[orden][orden];
+	this.aristas = new ArrayList<Arista>();
+	this.adyacencias = new Arista[orden][orden];
 	for(int i = 0; i < orden; i++) {
-	    this.adyacencias[i][i] = 0;
-	    for(int j = 0; j < orden; j++)
-		distancias[i][j] = this.adyacencias[i][j];
+	    for(int j = 0; j < orden; j++) {
+		if(adyacencias[i][j] != null)
+		    this.agregarArista(i, j, adyacencias[i][j]);
+	    }
 	}
     }
 
     public void agregarArista(int vi, int vf, int peso) {
-	this.adyacencias[vi][vf] = peso;
-	this.distancias[vi][vf] = peso;
+	Arista nueva = new Arista(vi, vf, peso);
+	this.aristas.add(nueva);
+	this.adyacencias[vi][vf] = nueva;
+    }
+
+    public void agregarArista(Arista nueva) {
+	this.aristas.add(nueva);
+	this.adyacencias[nueva.getVi()][nueva.getVf()] = nueva;
     }
 
     // TODO: IMPLEMENTAR FORD
 
-    public void floydWarshall() {
+    public Integer[][] floydWarshall() {
 	/*
 	 * Calcula la menor distancia entre dos nodos para cada nodo de un grafo ponderado
 	 */
 
+	Integer[][] distancias = new Integer[orden][orden]; // Distancias de un nodo a otro
+
+	// Inicializo distancias
+	for(int i = 0; i < orden; i++) {
+	    for(int j = 0; j < orden; j++) {
+		distancias[i][j] = this.peso(i, j);
+	    }
+	}
+
+	// Floyd-Warshall
 	for(int k = 0; k < orden; k++) {
 	    for(int i = 0; i < orden; i++) {
 		if(distancias[i][k] != null) {
@@ -53,6 +71,8 @@ public abstract class Grafo {
 		}
 	    }
 	}
+
+	return distancias;
     }
 
     public Integer[][] dijkstra(int ini) {
@@ -76,7 +96,6 @@ public abstract class Grafo {
 	    predecesor[w] = distancia[w] != null ? ini : null;
 	}
 
-	distancia[ini] = 0;
 	visitado[ini] = true;
 
 	Integer v = menorNoVisitado(distancia, visitado);
@@ -119,7 +138,12 @@ public abstract class Grafo {
     }
 
     public Integer peso(int a, int b) {
-	return this.adyacencias[a][b];
+	if(a == b)
+	    return 0;
+	else if(this.adyacencias[a][b] != null)
+	    return this.adyacencias[a][b].getPeso();
+	else
+	    return null;
     }
 
     public List<Integer> sucesores(int padre) {
@@ -127,14 +151,10 @@ public abstract class Grafo {
 
 	List<Integer> r = new ArrayList<Integer>();
 	for(int i = 0; i < orden; i++) {
-	    if(adyacencias[padre][i] != INFINITO && padre != i)
+	    if(this.adyacencias[padre][i] != null && padre != i)
 		r.add(i);
 	}
 	return r;
-    }
-
-    public Integer[][] distancias() {
-	return this.distancias;
     }
 
     @Override
@@ -142,22 +162,8 @@ public abstract class Grafo {
 	String r = "";
 	for(int i = 0; i < orden; i++) {
 	    for(int j = 0; j < orden; j++) {
-		r += adyacencias[i][j] != INFINITO
-					? String.format(" %3d ", adyacencias[i][j])
+		r += this.peso(i, j) != null ? String.format(" %3d ", this.peso(i, j))
 					: " inf ";
-	    }
-	    r += "\n\n";
-	}
-	return r;
-    }
-
-    public static String matrizToString(Integer[][] m) {
-	// Auxiliar para representar cualquier matriz de Integer de las que uso en Grafo
-
-	String r = "";
-	for(int i = 0; i < m.length; i++) {
-	    for(int j = 0; j < m.length; j++) {
-		r += m[i][j] != INFINITO ? String.format(" %3d ", m[i][j]) : " inf ";
 	    }
 	    r += "\n\n";
 	}
