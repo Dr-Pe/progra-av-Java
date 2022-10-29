@@ -29,8 +29,21 @@ public class GrafoNoDirigido extends Grafo {
 	super.agregarArista(vf, vi, peso);
     }
 
-    // TODO: IMPLEMENTAR PRIM, KRUSKAL
+    // TODO: IMPLEMENTAR KRUSKAL
+    public int kruskal() {
+	/*
+	 * Computa el MST (minimum spanning tree) del GrafoNoDirigido, el cual carga en this.mst, y
+	 * devuelve su peso total
+	 */
 
+	this.mst = new GrafoNoDirigido(this.orden);
+	int pesoTotal = 0;
+
+
+	return pesoTotal;
+    }
+
+    // TODO: Debería ser O(n^2) y creo que me quedó O(n^4) xd
     public int prim() {
 	/*
 	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo y
@@ -52,18 +65,18 @@ public class GrafoNoDirigido extends Grafo {
 	    pesoTotal += menor[2];
 	    menor = null;
 	    for(Integer nodo : visitados) {
-		Integer[] posibleMenor = menorAristaNodoNoVisitado(nodo, visitados);
+		Integer[] posibleMenor = menorAristaNodoNoVisitado(nodo, visitados); // O(n^2)
 		if(menor == null || (posibleMenor != null && posibleMenor[2] < menor[2]))
 		    menor = posibleMenor;
-	    }
-	}
+	    } // O(visitados x n x n) ~= O(n^3)
+	} // O(n^4)? Me quedó ineficiente
 
 	return pesoTotal;
     }
 
     private Integer[] menorAristaNodoNoVisitado(int ni, List<Integer> vis) {
 	// Devuelve { nodoInicial, nodoFinal, pesoArista } del arista con menor peso entre ni y otro
-	// nodo
+	// nodo. O(n^2) por culpa del List.contains().
 
 	Integer nodoFinal = null;
 	Integer menorPeso = null;
