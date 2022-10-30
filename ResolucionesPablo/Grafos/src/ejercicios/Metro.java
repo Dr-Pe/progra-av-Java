@@ -32,6 +32,7 @@ public class Metro {
 	int cantPuentes = m.resolver();
 
 	System.out.println(cantPuentes);
+	System.out.println(m.plano.getMST());
 
     }
 

@@ -42,6 +42,8 @@ public class GrafoNoDirigido extends Grafo {
 	// 2. Agrega aristas con menor peso que no creen ciclos hasta que todos los nodos sean
 	// visitables
 	for(Arista ar : this.aristas) {
+	    // TODO: Condicional mal, debo usar otro algtm para detectar si hay ciclos. Ej:
+	    // Union-Find
 	    if(!visitado[ar.getVf()]) {
 		visitado[ar.getVi()] = true;
 		visitado[ar.getVf()] = true;
