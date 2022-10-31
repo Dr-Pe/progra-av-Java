@@ -1,7 +1,7 @@
 package ejercicios;
 
+import grafos.GrafoBFT;
 import grafos.GrafoDirigido;
-import grafos.GrafoMST;
 import grafos.GrafoNoDirigido;
 
 public class Main {
@@ -17,10 +17,9 @@ public class Main {
 
 	System.out.println(GND);
 
-	GrafoMST MST = new GrafoMST(GND);
-	MST.kruskal();
+	GrafoBFT BFT = new GrafoBFT(GND, 0);
 
-	System.out.println(MST);
+	System.out.println(BFT);
 
     }
 }
