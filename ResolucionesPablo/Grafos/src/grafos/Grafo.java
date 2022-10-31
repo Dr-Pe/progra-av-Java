@@ -46,18 +46,19 @@ public abstract class Grafo {
     public Integer[][] floydWarshall() {
 	/*
 	 * Calcula la menor distancia entre dos nodos para cada nodo de un grafo ponderado
+	 * Complejidad: O(N^3)
 	 */
 
 	Integer[][] distancias = new Integer[orden][orden]; // Distancias de un nodo a otro
 
-	// Inicializo distancias
+	// Inicializo distancias (O(N^2))
 	for(int i = 0; i < orden; i++) {
 	    for(int j = 0; j < orden; j++) {
 		distancias[i][j] = this.peso(i, j);
 	    }
 	}
 
-	// Floyd-Warshall
+	// Floyd-Warshall (O(N^3))
 	for(int k = 0; k < orden; k++) {
 	    for(int i = 0; i < orden; i++) {
 		if(distancias[i][k] != null) {
@@ -84,6 +85,7 @@ public abstract class Grafo {
 	 * 
 	 * in: Nodo a partir del cual calcular
 	 * out: vector de distancia minima y vector de precedencia (camino).
+	 * complejidad: O(N^2) donde N = # de nodos
 	 */
 
 	Integer[] distancia = new Integer[orden];  // Distancias desde ini hasta
@@ -106,16 +108,18 @@ public abstract class Grafo {
 		    distancia[w] = distancia[v] + peso(v, w);
 		    predecesor[w] = v;
 		}
-	    }
+	    } // O(N)
 	    v = menorNoVisitado(distancia, visitado);
-	}
+	} // O(N^2)
 
 	return new Integer[][] { distancia, predecesor };
     }
 
     private Integer menorNoVisitado(Integer[] dis, boolean[] vis) {
-	// Devuelve el indice del nodo con menor distancia que aún no haya sido
-	// visitado, null si todos fueron visitados
+	/*
+	 * Devuelve el indice del nodo con menor distancia que aún no haya sido
+	 * visitado, null si todos fueron visitados. O(N)
+	 */
 
 	Integer idxMenor = null;
 

@@ -1,6 +1,7 @@
 package ejercicios;
 
 import grafos.GrafoDirigido;
+import grafos.GrafoMST;
 import grafos.GrafoNoDirigido;
 
 public class Main {
@@ -9,11 +10,17 @@ public class Main {
 
 	Integer[][] mat = new Integer[][] { { null, 7, 3, null }, { null, null, null, 2 },
 		{ null, 2, null, 8 }, { null, null, null, null } };
+
+	@SuppressWarnings("unused")
 	GrafoDirigido GD = new GrafoDirigido(mat);
 	GrafoNoDirigido GND = new GrafoNoDirigido(mat);
 
-	System.out.println(GD);
 	System.out.println(GND);
+
+	GrafoMST MST = new GrafoMST(GND);
+	MST.kruskal();
+
+	System.out.println(MST);
 
     }
 }

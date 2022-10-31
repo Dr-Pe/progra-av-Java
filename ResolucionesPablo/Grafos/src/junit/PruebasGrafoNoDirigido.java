@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import grafos.GrafoMST;
 import grafos.GrafoNoDirigido;
 
 public class PruebasGrafoNoDirigido {
@@ -104,8 +105,8 @@ public class PruebasGrafoNoDirigido {
 
     @Test
     public void kruskalPesoFinalGND1() {
-	int peso = GND1.kruskal();
-	Assert.assertEquals(7, peso);
+	GrafoMST mst = new GrafoMST(GND1);
+	Assert.assertEquals(7, mst.kruskal());
     }
 
 }

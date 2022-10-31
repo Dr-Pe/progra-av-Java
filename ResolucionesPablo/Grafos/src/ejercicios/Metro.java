@@ -3,6 +3,7 @@ package ejercicios;
 import java.io.File;
 import java.util.Scanner;
 
+import grafos.GrafoMST;
 import grafos.GrafoNoDirigido;
 
 public class Metro {
@@ -32,7 +33,6 @@ public class Metro {
 	int cantPuentes = m.resolver();
 
 	System.out.println(cantPuentes);
-	System.out.println(m.plano.getMST());
 
     }
 
@@ -43,7 +43,8 @@ public class Metro {
     private int resolver() {
 	// Devuelve la cantidad de puentes estrictamente necesarios
 
-	int pesoTotal = plano.kruskal();
+	GrafoMST mst = new GrafoMST(plano);
+	int pesoTotal = mst.kruskal();
 	return pesoTotal;
     }
 
