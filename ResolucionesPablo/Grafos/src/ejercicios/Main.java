@@ -1,6 +1,7 @@
 package ejercicios;
 
-import grafos.GrafoBFT;
+import java.util.Arrays;
+
 import grafos.GrafoDirigido;
 import grafos.GrafoNoDirigido;
 
@@ -17,9 +18,9 @@ public class Main {
 
 	System.out.println(GND);
 
-	GrafoBFT BFT = new GrafoBFT(GND, 0);
+	Integer[] arrayBFS = GND.BFS(0);
 
-	System.out.println(BFT);
+	System.out.println(Arrays.toString(arrayBFS));
 
     }
 }

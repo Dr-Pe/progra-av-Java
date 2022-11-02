@@ -1,7 +1,10 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public abstract class Grafo {
 
@@ -39,6 +42,60 @@ public abstract class Grafo {
     public void agregarArista(Arista nueva) {
 	this.aristas.add(nueva);
 	this.adyacencias[nueva.getVi()][nueva.getVf()] = nueva;
+    }
+
+    public Integer[] BFS(int raiz) {
+	/*
+	 * Devuelve un array con los nodos en orden según BFS
+	 */
+
+	Queue<Integer> q = new LinkedList<Integer>();
+	boolean[] visitados = new boolean[this.orden];
+	List<Integer> r = new ArrayList<Integer>();
+
+	visitados[raiz] = true;
+	q.add(raiz);
+	r.add(raiz);
+
+	while(!q.isEmpty()) {
+	    int v = q.remove();
+	    for(Integer w : this.sucesores(v)) {
+		if(!visitados[w]) {
+		    visitados[w] = true;
+		    q.add(w);
+		    r.add(w);
+		}
+	    }
+	}
+
+	return r.toArray(new Integer[0]);
+    }
+
+    public Integer[] DFS(int raiz) {
+	/*
+	 * Devuelve un array con los nodos en orden según DFS
+	 */
+
+	Deque<Integer> s = new LinkedList<Integer>();
+	boolean[] visitados = new boolean[this.orden];
+	List<Integer> r = new ArrayList<Integer>();
+
+	visitados[raiz] = true;
+	s.push(raiz);
+	r.add(raiz);
+
+	while(!s.isEmpty()) {
+	    int v = s.pop();
+	    for(Integer w : this.sucesores(v)) {
+		if(!visitados[w]) {
+		    visitados[w] = true;
+		    s.push(w);
+		    r.add(w);
+		}
+	    }
+	}
+
+	return r.toArray(new Integer[0]);
     }
 
     // TODO: IMPLEMENTAR FORD
