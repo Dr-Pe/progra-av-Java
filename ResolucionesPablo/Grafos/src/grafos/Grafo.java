@@ -11,19 +11,16 @@ public abstract class Grafo {
     protected final static Integer INFINITO = null;
 
     protected int orden; 		// Cantidad de vértices o nodos
-    protected List<Arista> aristas;	// Lista de aristas del Grafo
     protected Arista[][] adyacencias;	// Las mismas aristas de la lista pero en sus respectivas
 				     	// posiciones en la matriz de adyacencia
 
     public Grafo(int orden) {
 	this.orden = orden;
-	this.aristas = new ArrayList<Arista>();
 	this.adyacencias = new Arista[orden][orden];
     }
 
     public Grafo(Integer[][] adyacencias) {
 	this.orden = adyacencias.length;
-	this.aristas = new ArrayList<Arista>();
 	this.adyacencias = new Arista[orden][orden];
 	for(int i = 0; i < orden; i++) {
 	    for(int j = 0; j < orden; j++) {
@@ -35,12 +32,10 @@ public abstract class Grafo {
 
     public void agregarArista(int vi, int vf, int peso) {
 	Arista nueva = new Arista(vi, vf, peso);
-	this.aristas.add(nueva);
 	this.adyacencias[vi][vf] = nueva;
     }
 
     public void agregarArista(Arista nueva) {
-	this.aristas.add(nueva);
 	this.adyacencias[nueva.getVi()][nueva.getVf()] = nueva;
     }
 

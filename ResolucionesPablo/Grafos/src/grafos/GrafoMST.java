@@ -3,13 +3,21 @@ package grafos;
 import java.util.ArrayList;
 import java.util.List;
 
+import sets.SetDisjunto;
+
 public class GrafoMST extends GrafoNoDirigido {
 
-    private List<Arista> aristasOriginales;
+    private List<Arista> aristas;
 
     public GrafoMST(GrafoNoDirigido original) {
 	super(original.orden);
-	this.aristasOriginales = new ArrayList<Arista>(original.aristas);
+	this.aristas = new ArrayList<Arista>();
+	for(int i = 0; i < orden; i++) {
+	    for(int j = i; j < orden; j++) {
+		if(original.adyacencias[i][j] != null)
+		    this.aristas.add(original.adyacencias[i][j]);
+	    }
+	}
     }
 
     // TODO: IMPLEMENTAR KRUSKAL. DONE, PERO ANDA MAL PARA EL EJERCICIO "METRO"
@@ -20,21 +28,21 @@ public class GrafoMST extends GrafoNoDirigido {
 	 */
 
 	int pesoTotal = 0;
-	boolean[] visitado = new boolean[orden];   // Si el nodo [v] ya fue visitado
+	SetDisjunto set = new SetDisjunto(this.orden);
+
 
 	// 1. Ordena todas las aristas
-	this.aristasOriginales.sort(null);
+	this.aristas.sort(null);
 
 	// 2. Agrega aristas con menor peso que no creen ciclos hasta que todos los nodos sean
 	// visitables
-	for(Arista ar : this.aristasOriginales) {
-	    // TODO: Condicional mal, debo usar otro algtm para detectar si hay ciclos. Ej:
-	    // Union-Find
-	    if(!visitado[ar.getVf()]) {
-		visitado[ar.getVi()] = true;
-		visitado[ar.getVf()] = true;
+	for(Arista ar : this.aristas) {
+	    int vi = ar.getVi();
+	    int vf = ar.getVf();
+	    if(!set.mismoSet(vi, vf)) {
 		pesoTotal += ar.getPeso();
 		this.agregarArista(ar);
+		set.unir(vi, vf);
 	    }
 	}
 

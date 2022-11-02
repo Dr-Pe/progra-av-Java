@@ -1,7 +1,5 @@
 package ejercicios;
 
-import java.util.Arrays;
-
 import grafos.GrafoDirigido;
 import grafos.GrafoNoDirigido;
 
@@ -17,10 +15,6 @@ public class Main {
 	GrafoNoDirigido GND = new GrafoNoDirigido(mat);
 
 	System.out.println(GND);
-
-	Integer[] arrayBFS = GND.BFS(0);
-
-	System.out.println(Arrays.toString(arrayBFS));
 
     }
 }
