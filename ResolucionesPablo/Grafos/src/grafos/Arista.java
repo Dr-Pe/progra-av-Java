@@ -29,4 +29,16 @@ public class Arista implements Comparable<Arista> {
 	return this.peso;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+	if(this == obj)
+	    return true;
+	if(obj == null)
+	    return false;
+	if(getClass() != obj.getClass())
+	    return false;
+	Arista other = (Arista) obj;
+	return peso == other.peso && vf == other.vf && vi == other.vi;
+    }
+
 }

@@ -1,6 +1,7 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +38,31 @@ public abstract class Grafo {
 
     public void agregarArista(Arista nueva) {
 	this.adyacencias[nueva.getVi()][nueva.getVf()] = nueva;
+    }
+
+    public void desconectarVertice(int v) {
+	/*
+	 * Como la matriz del Grafo no es dinamica en realidad es imposible eliminar un nodo, pero
+	 * sí se lo puede desconectar totalmente
+	 */
+
+	for(int j = 0; j < orden; j++)
+	    this.adyacencias[v][j] = null;
+    }
+
+    public int getOrden() {
+	return this.orden;
+    }
+
+    public List<Arista> getAristas(int v) {
+	// Devuelve lista de aristas desde v
+
+	List<Arista> r = new ArrayList<Arista>();
+	for(int j = 0; j < orden; j++) {
+	    if(this.adyacencias[v][j] != null)
+		r.add(this.adyacencias[v][j]);
+	}
+	return r;
     }
 
     public Integer[] BFS(int raiz) {
@@ -211,6 +237,18 @@ public abstract class Grafo {
 		r.add(i);
 	}
 	return r;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if(this == obj)
+	    return true;
+	if(obj == null)
+	    return false;
+	if(getClass() != obj.getClass())
+	    return false;
+	Grafo other = (Grafo) obj;
+	return Arrays.deepEquals(adyacencias, other.adyacencias);
     }
 
     @Override

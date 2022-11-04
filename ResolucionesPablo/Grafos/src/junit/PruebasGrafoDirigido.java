@@ -54,6 +54,19 @@ public class PruebasGrafoDirigido {
     }
 
     @Test
+    public void igualdadGD1() {
+	GrafoDirigido GD1Prima = new GrafoDirigido(4);
+
+	GD1Prima.agregarArista(0, 1, 7);
+	GD1Prima.agregarArista(0, 2, 3);
+	GD1Prima.agregarArista(1, 3, 2);
+	GD1Prima.agregarArista(2, 1, 2);
+	GD1Prima.agregarArista(2, 3, 8);
+
+	Assert.assertTrue(GD1Prima.equals(GD1));
+    }
+
+    @Test
     public void dijkstraNodo0GD1() {
 	Integer[][] r = GD1.dijkstra(0);
 

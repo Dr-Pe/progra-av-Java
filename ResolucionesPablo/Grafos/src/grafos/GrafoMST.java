@@ -7,6 +7,7 @@ import sets.SetDisjunto;
 
 public class GrafoMST extends GrafoNoDirigido {
 
+    private Integer pesoTotal;
     private List<Arista> aristas;
 
     public GrafoMST(GrafoNoDirigido original) {
@@ -20,22 +21,27 @@ public class GrafoMST extends GrafoNoDirigido {
 	}
     }
 
-    // TODO: IMPLEMENTAR KRUSKAL. DONE, PERO ANDA MAL PARA EL EJERCICIO "METRO"
-    public int kruskal() {
+    public Integer getPesoTotal() {
+	// TODO: Quizá este metodo debería tirar una excepcion si no se calculó
+	return this.pesoTotal;
+    }
+
+    public GrafoMST kruskal() {
 	/*
-	 * Computa el MST (minimum spanning tree) del GrafoNoDirigido, el cual carga en this.mst, y
-	 * devuelve su peso total
+	 * Computa el MST (minimum spanning tree) del GrafoNoDirigido original, lo guarda en este
+	 * GrafoMST, el cual devuelve
+	 * 
+	 * O(a * log(v))
 	 */
 
-	int pesoTotal = 0;
+	this.pesoTotal = 0;
 	SetDisjunto set = new SetDisjunto(this.orden);
 
 
 	// 1. Ordena todas las aristas
 	this.aristas.sort(null);
 
-	// 2. Agrega aristas con menor peso que no creen ciclos hasta que todos los nodos sean
-	// visitables
+	// 2. Agrega aristas con menor peso que no creen ciclos
 	for(Arista ar : this.aristas) {
 	    int vi = ar.getVi();
 	    int vf = ar.getVf();
@@ -46,10 +52,11 @@ public class GrafoMST extends GrafoNoDirigido {
 	    }
 	}
 
-	return pesoTotal;
+	return this;
     }
 
 //  // TODO: Debería ser O(n^2) y creo que me quedó O(n^4) xd
+
 //  public int prim() {
 //	/*
 //	 * Computa el MST (minimum spanning tree) en un GrafoNoDirigido completamente conexo y

@@ -1,5 +1,8 @@
 package grafos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GrafoNoDirigido extends Grafo {
 
     public GrafoNoDirigido(int orden) {
@@ -23,10 +26,16 @@ public class GrafoNoDirigido extends Grafo {
 	super.agregarArista(vf, vi, peso);
     }
 
-    public GrafoNoDirigido getMST() {
-	GrafoMST mst = new GrafoMST(this);
-	mst.kruskal();
-	return mst;
+    @Override
+    public List<Arista> getAristas(int v) {
+	// Devuelve lista de aristas desde v
+
+	List<Arista> r = new ArrayList<Arista>();
+	for(int j = v; j < orden; j++) {
+	    if(this.adyacencias[v][j] != null)
+		r.add(this.adyacencias[v][j]);
+	}
+	return r;
     }
 
 }

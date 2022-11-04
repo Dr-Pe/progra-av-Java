@@ -43,9 +43,8 @@ public class Metro {
     private int resolver() {
 	// Devuelve la cantidad de puentes estrictamente necesarios
 
-	GrafoMST mst = new GrafoMST(plano);
-	int pesoTotal = mst.kruskal();
-	return pesoTotal;
+	GrafoMST mst = new GrafoMST(plano).kruskal();
+	return mst.getPesoTotal();
     }
 
     private void cargarArchivoIn(String pathIn) {

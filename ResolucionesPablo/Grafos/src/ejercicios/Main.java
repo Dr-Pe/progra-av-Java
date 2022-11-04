@@ -1,6 +1,7 @@
 package ejercicios;
 
 import grafos.GrafoDirigido;
+import grafos.GrafoMST;
 import grafos.GrafoNoDirigido;
 
 public class Main {
@@ -14,7 +15,9 @@ public class Main {
 	GrafoDirigido GD = new GrafoDirigido(mat);
 	GrafoNoDirigido GND = new GrafoNoDirigido(mat);
 
-	System.out.println(GND);
+	GrafoMST MST = new GrafoMST(GND);
+
+	System.out.println(MST);
 
     }
 }
