@@ -8,8 +8,15 @@ import edu.unlam.snake.engine.Point;
 
 public class MyBrain extends Brain {
 
+    /*
+     * Pablo Ferreira,
+     * Cristian Berrios.
+     * 
+     * 5/11/2022
+     */
+
     public MyBrain() {
-	super("IdLoom1 | IdLoom2 | IdLoom3");
+	super("Ferreira | Berrios");
 //		throw new RuntimeException("Agregar ids loom");
 
     }
@@ -26,36 +33,7 @@ public class MyBrain extends Brain {
 	Point posibleHead = head.clone();
 
 	Point fr = buscarFrutaMasCercana(head, fruits);
-
-//	if(previous == Direction.UP || previous == Direction.DOWN) {
-//	    if(fr.getX() < head.getX()) {
-//		if(previous == Direction.UP)
-//		    r = r.turnLeft();
-//		else
-//		    r = r.turnRight();
-//	    }
-//	    else {
-//		if(previous == Direction.UP)
-//		    r = r.turnRight();
-//		else
-//		    r = r.turnLeft();
-//	    }
-//	}
-//	else {
-//	    if(fr.getY() < head.getY()) {
-//		if(previous == Direction.RIGHT)
-//		    r = r.turnLeft();
-//		else
-//		    r = r.turnRight();
-//	    }
-//	    else {
-//		if(previous == Direction.LEFT)
-//		    r = r.turnRight();
-//		else
-//		    r = r.turnLeft();
-//	    }
-//	}
-
+	r = moverHaciaFruta(head, r, fr);
 	myNextHead.moveTo(r);
 
 	for(Point obstacle : obstacles) {
@@ -80,10 +58,10 @@ public class MyBrain extends Brain {
 	    }
 	}
 
-	for(Point obstacle : obstacles) {
-	    if(myNextHead.equals(obstacle)) {
+	for(Point pls : snake) {
+	    if(myNextHead.equals(pls)) {
 		posibleHead.moveTo(r.turnRight());
-		if(posibleHead.equals(obstacle))
+		if(posibleHead.equals(pls))
 		    return r.turnLeft();
 		else
 		    r = r.turnRight();
@@ -91,6 +69,27 @@ public class MyBrain extends Brain {
 	}
 
 	return r;
+    }
+
+    public Direction moverHaciaFruta(Point head, Direction prev, Point fruta) {
+	Point adelante = head.clone();
+	Point izquierda = head.clone();
+	Point derecha = head.clone();
+
+	adelante.moveTo(prev);
+	izquierda.moveTo(prev.turnLeft());
+	derecha.moveTo(prev.turnRight());
+
+	double a = distancia(adelante, fruta);
+	double b = distancia(izquierda, fruta);
+	double c = distancia(derecha, fruta);
+
+	if(a < b && a < c)
+	    return prev;
+	else if(b < c)
+	    return prev.turnLeft();
+	else
+	    return prev.turnRight();
     }
 
     public Point buscarFrutaMasCercana(Point head, List<Point> fruits) {
