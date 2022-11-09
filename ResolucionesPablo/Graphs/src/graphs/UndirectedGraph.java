@@ -20,13 +20,14 @@ public class UndirectedGraph extends Graph {
 
     @Override
     public Integer weight(int vi, int vf) {
-	if(this.adjacency[rowMajorMap(vi, vf)] != NO_WAY)
+	if(vi <= vf && this.adjacency[rowMajorMap(vi, vf)] != NO_WAY)
 	    return this.adjacency[rowMajorMap(vi, vf)].getWeight();
+	else if(vi >= vf && this.adjacency[rowMajorMap(vf, vi)] != NO_WAY)
+	    return this.adjacency[rowMajorMap(vf, vi)].getWeight();
 	else
 	    return INFINITE;
     }
 
-    // TODO: MAL
     private int rowMajorMap(int i, int j) {
 	return (i * order - (i - 1) * i / 2) + (j - i);
     }

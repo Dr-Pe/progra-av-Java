@@ -18,6 +18,8 @@ public class Main {
 	G.addEdge(1, 3, 2);
 	G.addEdge(2, 3, 8);
 
+	System.out.println(G);
+
 	Dijkstra D = new Dijkstra(G, 0);
 
 	System.out.println(Arrays.toString(D.getDistances()));
