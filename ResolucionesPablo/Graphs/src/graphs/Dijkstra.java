@@ -11,7 +11,7 @@ public class Dijkstra {
 
 
     // TODO: Implementar con ColaDePrioridad
-    public Dijkstra(Graph G, Integer root) {
+    public Dijkstra(Graph G, int root) {
 	this.dist = G.distances(root);
 	this.pred = new Integer[G.order];
 

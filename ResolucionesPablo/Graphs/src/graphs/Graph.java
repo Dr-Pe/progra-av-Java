@@ -1,7 +1,10 @@
 package graphs;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
+import java.util.Queue;
 
 public abstract class Graph {
 
@@ -56,6 +59,44 @@ public abstract class Graph {
 	    r += "]\n";
 	}
 	return r;
+    }
+
+    public Integer[] BFS(int root) {
+	List<Integer> r = new ArrayList<Integer>();
+	Queue<Integer> S = new ArrayDeque<Integer>();
+	boolean[] visited = new boolean[order];
+
+	S.add(root);
+	while(!S.isEmpty()) {
+	    int vx = S.remove();
+	    if(!visited[vx]) {
+		r.add(vx);
+		visited[vx] = true;
+		for(Integer wx : neighbours(vx))
+		    S.add(wx);
+	    }
+	}
+
+	return r.toArray(new Integer[0]);
+    }
+
+    public Integer[] DFS(int root) {
+	List<Integer> r = new ArrayList<Integer>();
+	Deque<Integer> S = new ArrayDeque<Integer>();
+	boolean[] visited = new boolean[order];
+
+	S.push(root);
+	while(!S.isEmpty()) {
+	    int vx = S.pop();
+	    if(!visited[vx]) {
+		r.add(vx);
+		visited[vx] = true;
+		for(Integer wx : neighbours(vx))
+		    S.push(wx);
+	    }
+	}
+
+	return r.toArray(new Integer[0]);
     }
 
 }

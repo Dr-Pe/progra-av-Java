@@ -2,7 +2,6 @@ package test;
 
 import java.util.Arrays;
 
-import graphs.Dijkstra;
 import graphs.Graph;
 import graphs.UndirectedGraph;
 
@@ -20,10 +19,7 @@ public class Main {
 
 	System.out.println(G);
 
-	Dijkstra D = new Dijkstra(G, 0);
-
-	System.out.println(Arrays.toString(D.getDistances()));
-	System.out.println(Arrays.toString(D.getPredecessors()));
+	System.out.println(Arrays.toString(G.BFS(0)));
 
     }
 

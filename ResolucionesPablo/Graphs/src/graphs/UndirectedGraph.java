@@ -11,6 +11,13 @@ public class UndirectedGraph extends Graph {
 
     public UndirectedGraph(Integer[][] adjacency) {
 	super(adjacency);
+	this.adjacency = new Edge[order * (order + 1) / 2];
+	for(int i = 0; i < order; i++) {
+	    for(int j = i; j < order; j++) {
+		if(adjacency[i][j] != null)
+		    this.addEdge(i, j, adjacency[i][j]);
+	    }
+	}
     }
 
     @Override
