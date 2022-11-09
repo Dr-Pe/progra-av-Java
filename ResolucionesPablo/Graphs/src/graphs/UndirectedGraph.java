@@ -6,7 +6,7 @@ public class UndirectedGraph extends Graph {
 
     public UndirectedGraph(int order) {
 	super(order);
-	this.adjacency = new Edge[order];
+	this.adjacency = new Edge[order * (order + 1) / 2];
     }
 
     public UndirectedGraph(Integer[][] adjacency) {
@@ -15,20 +15,20 @@ public class UndirectedGraph extends Graph {
 
     @Override
     public void addEdge(int vi, int vf, Integer weight) {
-	this.adjacency[matrixToArray(vi, vf)] = new Edge(vi, vf, weight);
+	this.adjacency[rowMajorMap(vi, vf)] = new Edge(vi, vf, weight);
     }
 
     @Override
     public Integer weight(int vi, int vf) {
-	if(this.adjacency[matrixToArray(vi, vf)] != NO_WAY)
-	    return this.adjacency[matrixToArray(vi, vf)].getWeight();
+	if(this.adjacency[rowMajorMap(vi, vf)] != NO_WAY)
+	    return this.adjacency[rowMajorMap(vi, vf)].getWeight();
 	else
 	    return INFINITE;
     }
 
     // TODO: MAL
-    private int matrixToArray(int i, int j) {
-	return (order * (i - 1) - (i - 2) * (i - 1) / 2) + (j - i);
+    private int rowMajorMap(int i, int j) {
+	return (i * order - (i - 1) * i / 2) + (j - i);
     }
 
 }

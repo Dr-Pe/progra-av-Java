@@ -4,12 +4,13 @@ import java.util.Arrays;
 
 import graphs.Dijkstra;
 import graphs.Graph;
+import graphs.UndirectedGraph;
 
 public class Main {
 
     public static void main(String[] args) {
 
-	Graph G = new Graph(4);
+	Graph G = new UndirectedGraph(4);
 
 	G.addEdge(0, 1, 7);
 	G.addEdge(0, 2, 3);

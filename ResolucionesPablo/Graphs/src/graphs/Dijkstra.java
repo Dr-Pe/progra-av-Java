@@ -31,15 +31,16 @@ public class Dijkstra {
 	while(vx != null) {
 	    visit[vx] = true;
 	    for(Integer wx : G.neighbours(vx)) {
-		if(!G.areConnected(root, wx) || G.weight(vx, wx) + dist[vx] < dist[wx]) {
-		    dist[wx] = G.weight(vx, wx) + G.weight(root, vx);
+		if((!G.areConnected(root, wx) && wx != root)
+					|| G.weight(vx, wx) + dist[vx] < dist[wx]) {
+		    dist[wx] = G.weight(vx, wx) + dist[vx];
 		    pred[wx] = vx;
 		}
 		else if(G.areConnected(root, wx)) {
 		    pred[wx] = root;
 		}
 	    }
-	    vx = nearestUnvisitedVertex(dist, visit);
+	    vx = nearestUnvisitedVertex(dist, visit); // O(N)
 	}
 
     }
