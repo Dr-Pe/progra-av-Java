@@ -1,10 +1,15 @@
 package graphs;
 
+import java.util.ArrayList;
+import java.util.List;
+
+// TODO: abstract
 public class Graph {
 
-    protected final static Edge INF = null;
+    protected final static Integer INFINITE = null;
+    protected final static Edge NO_WAY = null;
 
-    private int order;
+    public final int order;
     private Edge[][] adjacency;
 
     public Graph(int order) {
@@ -23,26 +28,34 @@ public class Graph {
 	}
     }
 
-    public void addEdge(int i, int j, Integer weight) {
-	this.adjacency[i][j] = new Edge(i, j, weight);
+    public void addEdge(int vi, int vf, Integer weight) {
+	this.adjacency[vi][vf] = new Edge(vi, vf, weight);
     }
 
-    public int order() {
-	return this.order;
+    public Integer weight(int vi, int vf) {
+	if(this.adjacency[vi][vf] != NO_WAY)
+	    return this.adjacency[vi][vf].getWeight();
+	else
+	    return INFINITE;
     }
 
-    public int weight(int vi, int vf) {
-	return this.adjacency[vi][vf].getWeight();
+    public boolean areConnected(int vi, int vf) {
+	return this.weight(vi, vf) != INFINITE;
     }
 
-    public Integer[] adjacents(Integer root) {
-	Integer[] r = new Integer[this.order];
+    public List<Integer> neighbours(int vertex) {
+	List<Integer> r = new ArrayList<Integer>();
 	for(int j = 0; j < order; j++) {
-	    if(this.adjacency[root][j] != INF)
-		r[j] = this.weight(root, j);
-	    else
-		r[j] = null;
+	    if(this.weight(vertex, j) != INFINITE)
+		r.add(j);
 	}
+	return r;
+    }
+
+    public Integer[] distances(int root) {
+	Integer[] r = new Integer[order];
+	for(int j = 0; j < order; j++)
+	    r[j] = this.weight(root, j);
 	return r;
     }
 

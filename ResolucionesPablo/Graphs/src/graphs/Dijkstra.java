@@ -7,26 +7,49 @@ public class Dijkstra {
      */
 
     Integer[] dist; // Distancias desde root hasta Vi
-    Integer[] prev; // Vértices previos a Vi para llegar a la raíz
+    Integer[] pred; // Vértices previos a Vi para llegar a la raíz
 
 
     // TODO: Implementar con ColaDePrioridad
     public Dijkstra(Graph G, Integer root) {
-	this.dist = G.adjacents(root);
-	this.prev = new Integer[G.order()];
+	this.dist = G.distances(root);
+	this.pred = new Integer[G.order];
 
-	boolean[] visit = new boolean[G.order()]; // Vertices ya visitados
+	// Inicializo vector de predecesores
+	for(int j = 0; j < G.order; j++) {
+	    if(dist[j] != null)
+		pred[j] = root;
+	}
+
+	boolean[] visit = new boolean[G.order]; // Vertices ya visitados, inicialmente ninguno
 
 	dist[root] = 0;
-	prev[root] = root;
+	pred[root] = root;
 	visit[root] = true;
 
 	Integer vx = nearestUnvisitedVertex(dist, visit);
 	while(vx != null) {
 	    visit[vx] = true;
-
+	    for(Integer wx : G.neighbours(vx)) {
+		if(!G.areConnected(root, wx) || G.weight(vx, wx) + dist[vx] < dist[wx]) {
+		    dist[wx] = G.weight(vx, wx) + G.weight(root, vx);
+		    pred[wx] = vx;
+		}
+		else if(G.areConnected(root, wx)) {
+		    pred[wx] = root;
+		}
+	    }
+	    vx = nearestUnvisitedVertex(dist, visit);
 	}
 
+    }
+
+    public Integer[] getDistances() {
+	return this.dist;
+    }
+
+    public Integer[] getPredecessors() {
+	return this.pred;
     }
 
     private Integer nearestUnvisitedVertex(Integer[] adj, boolean[] vis) {
@@ -37,7 +60,7 @@ public class Dijkstra {
 
 	Integer idx = null;
 	for(int i = 0; i < adj.length; i++) {
-	    if(adj[i] != null) {
+	    if(adj[i] != null && !vis[i]) {
 		idx = i;
 		break;
 	    }
@@ -45,7 +68,7 @@ public class Dijkstra {
 	if(idx == null)
 	    return null;
 	for(int i = idx; i < adj.length; i++) {
-	    if(adj[i] != null && adj[i] < adj[idx])
+	    if(adj[i] != null && adj[i] < adj[idx] && !vis[i])
 		idx = i;
 	}
 	return idx;
