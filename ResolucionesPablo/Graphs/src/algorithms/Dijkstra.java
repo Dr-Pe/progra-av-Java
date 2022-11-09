@@ -1,4 +1,6 @@
-package graphs;
+package algorithms;
+
+import graphs.Graph;
 
 public class Dijkstra {
     /*
