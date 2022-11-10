@@ -10,7 +10,7 @@ public class DirectedGraph extends Graph {
     }
 
     public DirectedGraph(Integer[][] adjacency) {
-	super(adjacency);
+	super(adjacency.length);
 	this.adjacency = new Edge[order][order];
 	for(int i = 0; i < order; i++) {
 	    for(int j = 0; j < order; j++) {
@@ -21,13 +21,15 @@ public class DirectedGraph extends Graph {
     }
 
     @Override
-    public void addEdge(int vi, int vf, Integer weight) {
+    public void addEdge(int vi, int vf, int weight) {
 	this.adjacency[vi][vf] = new Edge(vi, vf, weight);
     }
 
     @Override
     public Integer weight(int vi, int vf) {
-	if(this.adjacency[vi][vf] != NO_WAY)
+	if(vi == vf)
+	    return 0;
+	else if(this.adjacency[vi][vf] != NO_WAY)
 	    return this.adjacency[vi][vf].getWeight();
 	else
 	    return INFINITE;

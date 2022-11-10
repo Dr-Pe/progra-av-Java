@@ -25,7 +25,7 @@ public class Dijkstra {
 
 	boolean[] visit = new boolean[G.order]; // Vertices ya visitados, inicialmente ninguno
 
-	dist[root] = 0;
+//	dist[root] = 0;
 	pred[root] = root;
 	visit[root] = true;
 
@@ -33,7 +33,7 @@ public class Dijkstra {
 	while(vx != null) {
 	    visit[vx] = true;
 	    for(Integer wx : G.neighbours(vx)) {
-		if((!G.areConnected(root, wx) && wx != root)
+		if((!G.areConnected(root, wx) && wx != root && vx != wx)
 					|| G.weight(vx, wx) + dist[vx] < dist[wx]) {
 		    dist[wx] = G.weight(vx, wx) + dist[vx];
 		    pred[wx] = vx;
@@ -47,11 +47,11 @@ public class Dijkstra {
 
     }
 
-    public Integer[] getDistances() {
+    public Integer[] distances() {
 	return this.dist;
     }
 
-    public Integer[] getPredecessors() {
+    public Integer[] predecessors() {
 	return this.pred;
     }
 

@@ -2,6 +2,7 @@ package test;
 
 import java.util.Arrays;
 
+import algorithms.FloydWarshall;
 import graphs.Graph;
 import graphs.UndirectedGraph;
 
@@ -9,17 +10,40 @@ public class Main {
 
     public static void main(String[] args) {
 
-	Graph G = new UndirectedGraph(4);
+	Graph G0 = new UndirectedGraph(4);
 
-	G.addEdge(0, 1, 7);
-	G.addEdge(0, 2, 3);
-	G.addEdge(1, 2, 2);
-	G.addEdge(1, 3, 2);
-	G.addEdge(2, 3, 8);
+	G0.addEdge(0, 1, 7);
+	G0.addEdge(0, 2, 3);
+	G0.addEdge(1, 2, 2);
+	G0.addEdge(1, 3, 2);
+	G0.addEdge(2, 3, 8);
 
-	System.out.println(G);
+//	Dijkstra dj = new Dijkstra(G0, 0);
+//
+//	System.out.println(Arrays.toString(dj.distances()));
 
-	System.out.println(Arrays.toString(G.BFS(0)));
+	FloydWarshall fw = new FloydWarshall(G0);
+
+	System.out.println(Arrays.toString(fw.distances()[0]));
+	System.out.println(Arrays.toString(fw.distances()[1]));
+	System.out.println(Arrays.toString(fw.distances()[2]));
+	System.out.println(Arrays.toString(fw.distances()[3]));
+
+	Graph G1 = new UndirectedGraph(7);
+
+	G1.addEdge(0, 1, 1);
+	G1.addEdge(0, 2, 1);
+	G1.addEdge(1, 2, 1);
+	G1.addEdge(2, 3, 1);
+	G1.addEdge(3, 4, 1);
+	G1.addEdge(3, 5, 1);
+	G1.addEdge(3, 6, 1);
+
+//	System.out.println(G1);
+//
+//	WelshPowell wp = new WelshPowell(G1);
+//
+//	System.out.println(Arrays.toString(wp.getColors().values().toArray()));
 
     }
 

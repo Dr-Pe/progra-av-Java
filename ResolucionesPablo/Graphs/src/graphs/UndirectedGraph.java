@@ -10,7 +10,7 @@ public class UndirectedGraph extends Graph {
     }
 
     public UndirectedGraph(Integer[][] adjacency) {
-	super(adjacency);
+	super(adjacency.length);
 	this.adjacency = new Edge[order * (order + 1) / 2];
 	for(int i = 0; i < order; i++) {
 	    for(int j = i; j < order; j++) {
@@ -21,13 +21,15 @@ public class UndirectedGraph extends Graph {
     }
 
     @Override
-    public void addEdge(int vi, int vf, Integer weight) {
+    public void addEdge(int vi, int vf, int weight) {
 	this.adjacency[rowMajorMap(vi, vf)] = new Edge(vi, vf, weight);
     }
 
     @Override
     public Integer weight(int vi, int vf) {
-	if(vi <= vf && this.adjacency[rowMajorMap(vi, vf)] != NO_WAY)
+	if(vi == vf)
+	    return 0;
+	else if(vi <= vf && this.adjacency[rowMajorMap(vi, vf)] != NO_WAY)
 	    return this.adjacency[rowMajorMap(vi, vf)].getWeight();
 	else if(vi >= vf && this.adjacency[rowMajorMap(vf, vi)] != NO_WAY)
 	    return this.adjacency[rowMajorMap(vf, vi)].getWeight();

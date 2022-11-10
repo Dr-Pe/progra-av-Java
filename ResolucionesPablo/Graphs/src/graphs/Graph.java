@@ -17,11 +17,7 @@ public abstract class Graph {
 	this.order = order;
     }
 
-    public Graph(Integer[][] adjacency) {
-	this.order = adjacency.length;
-    }
-
-    public abstract void addEdge(int vi, int vf, Integer weight);
+    public abstract void addEdge(int vi, int vf, int weight);
 
     public abstract Integer weight(int vi, int vf);
 
