@@ -1,5 +1,7 @@
 package graphs;
 
+import java.util.Arrays;
+
 public class DirectedGraph extends Graph {
 
     private Edge[][] adjacency;
@@ -33,6 +35,18 @@ public class DirectedGraph extends Graph {
 	    return this.adjacency[vi][vf].getWeight();
 	else
 	    return INFINITE;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if(this == obj)
+	    return true;
+	if(obj == null)
+	    return false;
+	if(getClass() != obj.getClass())
+	    return false;
+	DirectedGraph other = (DirectedGraph) obj;
+	return Arrays.deepEquals(adjacency, other.adjacency);
     }
 
 }

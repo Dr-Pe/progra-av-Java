@@ -21,6 +21,9 @@ public abstract class Graph {
 
     public abstract Integer weight(int vi, int vf);
 
+    @Override
+    public abstract boolean equals(Object o);
+
     public void addEdge(Edge e) {
 	this.addEdge(e.getVi(), e.getVf(), e.getWeight());
     }

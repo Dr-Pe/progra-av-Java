@@ -20,22 +20,20 @@ public class Prim {
 
 	visit[root] = true;
 	visitedSet.add(root);
-	Integer other = nearestUnvisitedVertex(G.distances(root), visit);
 
-	while(other != null) {
-	    Edge min = new Edge(root, other, G.weight(root, other));
+	while(visitedSet.size() < G.order) {
+	    Edge min = null;
 	    for(Integer vx : visitedSet) {
-		Integer wx = nearestUnvisitedVertex(G.distances(vx), visit);
+		Integer wx = nearestUnvisitedVertex(G.distances(vx), visit); // O(V)
 		if(wx != null) {
 		    Edge alt = new Edge(vx, wx, G.weight(vx, wx));
-		    if(alt.getWeight() < min.getWeight())
+		    if(min == null || alt.getWeight() < min.getWeight())
 			min = alt;
-		}
-	    }
+		} // O(V^2)
+	    } // O(V^3)
 	    visit[min.getVf()] = true;
 	    visitedSet.add(min.getVf());
 	    MST.addEdge(min);
-	    other = nearestUnvisitedVertex(G.distances(root), visit);
 	}
     }
 
@@ -46,7 +44,7 @@ public class Prim {
     private Integer nearestUnvisitedVertex(Integer[] adj, boolean[] vis) {
 	/*
 	 * Devuelve el indice del nodo con menor distancia que aún no haya sido
-	 * visitado, null si todos fueron visitados. O(N)
+	 * visitado, null si todos fueron visitados. O(V)
 	 */
 
 	Integer idx = null;

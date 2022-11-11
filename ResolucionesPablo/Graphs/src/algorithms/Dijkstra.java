@@ -42,7 +42,7 @@ public class Dijkstra {
 		    pred[wx] = root;
 		}
 	    }
-	    vx = nearestUnvisitedVertex(dist, visit); // O(N)
+	    vx = nearestUnvisitedVertex(dist, visit); // O(V)
 	}
 
     }
@@ -58,7 +58,7 @@ public class Dijkstra {
     private Integer nearestUnvisitedVertex(Integer[] adj, boolean[] vis) {
 	/*
 	 * Devuelve el indice del nodo con menor distancia que aún no haya sido
-	 * visitado, null si todos fueron visitados. O(N)
+	 * visitado, null si todos fueron visitados. O(V)
 	 */
 
 	Integer idx = null;

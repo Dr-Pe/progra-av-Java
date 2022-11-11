@@ -20,6 +20,8 @@ public class Main {
 
 	Graph MST0 = pr.getMST();
 
+	System.out.println(G0);
+
 	System.out.println(MST0);
 
 //	FloydWarshall fw = new FloydWarshall(G0);
