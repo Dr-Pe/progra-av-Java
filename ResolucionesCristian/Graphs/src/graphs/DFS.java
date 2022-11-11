@@ -5,6 +5,7 @@ import java.util.LinkedList;
 /*
 	*
 	* sirve para todo tipo de grafo
+	* 
 	* Complejidad: O(N+A)
 	* 
 	* 	Preparacion:

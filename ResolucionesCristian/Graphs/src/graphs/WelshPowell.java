@@ -1,17 +1,15 @@
 package graphs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 	/*	para grafo no dirigido y conexo
 	 * 
-	 * 	Complejidad: O(n^3)
+	 * 	Complejidad: O(n^3); ideal es n^2 pero nose.
 	 * 
 	 * 	PREPARACION
 	 * agrupo por grado los nodos
@@ -28,7 +26,7 @@ import java.util.TreeMap;
 	 */
 
 public class WelshPowell {
-	List<Integer[]> conjuntos;
+
 	Map<Integer, ArrayList<Node>> coloreo;
 
 	public WelshPowell(Graph g) {
@@ -46,8 +44,6 @@ public class WelshPowell {
 				l.add(n);
 		}
 
-		System.out.println(l);
-
 		Collections.sort(l, new Comparator<Node>() {
 			@Override
 			public int compare(Node o1, Node o2) {
@@ -60,17 +56,12 @@ public class WelshPowell {
 			coloreo.put(i, new ArrayList<Node>());
 		}
 
-		// g.printNodes();
-
 		for (int i = 0; i < l.size(); i++) {
 			Node v = l.get(i);
 			color = buscarColor(g.neighboursNode(v));
 			coloreo.get(color).add(v);
 			v.setColor(color);
-		}
-
-//		System.out.println(coloreo.values());
-		
+		}	
 	}
 
 	// busco minimo color disponible
