@@ -6,21 +6,21 @@ public class Edge implements Comparable<Edge> {
     private int vf;
     private int weight;
 
-    protected Edge(int vi, int vf, int weight) {
+    public Edge(int vi, int vf, int weight) {
 	this.vi = vi;
 	this.vf = vf;
 	this.weight = weight;
     }
 
-    protected int getVi() {
+    public int getVi() {
 	return vi;
     }
 
-    protected int getVf() {
+    public int getVf() {
 	return vf;
     }
 
-    protected int getWeight() {
+    public int getWeight() {
 	return weight;
     }
 

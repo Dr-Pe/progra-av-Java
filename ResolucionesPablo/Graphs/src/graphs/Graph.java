@@ -21,6 +21,10 @@ public abstract class Graph {
 
     public abstract Integer weight(int vi, int vf);
 
+    public void addEdge(Edge e) {
+	this.addEdge(e.getVi(), e.getVf(), e.getWeight());
+    }
+
     public boolean areConnected(int vi, int vf) {
 	return this.weight(vi, vf) != INFINITE;
     }
