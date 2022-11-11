@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 public class ColoreoRandom {
-	/*	para grafo no dirigido y conexo
+	/*	para grafo no dirigido
 	 * 
-	 * 	Complejidad: O(n^3)
+	 * 	Complejidad: O(n^3);	ideal es n^2 pero nose.
 	 * 
 	 * 	PREPARACION
 	 * agrupo por grado los nodos
-	 * orderno por grado
+	 * orderno aleatoriamente
 	 * 
 	 *  EJECUCION
-	 * tomo primer nodo ordenado, pregunto si esta pintado
+	 * tomo primer nodo de la lista "ordenada", pregunto si esta pintado
 	 * si esta pintando, salteo
 	 * si no esta pintado, pregunto que color de los nodos adyacentes existen
 	 * tomo el color minimo posible
