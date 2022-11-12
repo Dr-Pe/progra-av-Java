@@ -6,42 +6,33 @@ import java.util.Set;
 import graphs.Edge;
 import graphs.UndirectedGraph;
 
-public class Prim {
-
-    private UndirectedGraph MST;
+public class Prim extends MinimumSpanningTreeAlgorithm {
 
     public Prim(UndirectedGraph G) {
-	this.MST = new UndirectedGraph(G.order);
+	super(G); // Creates an empy MST Graph the same size as G
 
-	int root = 0;
-	boolean[] visit = new boolean[G.order];
-	Set<Integer> visitedSet = new HashSet<Integer>();
+	Set<Integer> visited = new HashSet<Integer>(); // This class offers constant time
+						       // performance for the basic operations
+						       // (add, remove, contains and size)
 
+	visited.add(0); // Se elige como vertice inicial el 0 arbitrariamente
 
-	visit[root] = true;
-	visitedSet.add(root);
-
-	while(visitedSet.size() < G.order) {
+	while(visited.size() < G.order) {
 	    Edge min = null;
-	    for(Integer vx : visitedSet) {
-		Integer wx = nearestUnvisitedVertex(G.distances(vx), visit); // O(V)
+	    for(Integer vx : visited) {
+		Integer wx = nearestUnvisitedVertex(G.distances(vx), visited); // O(V)
 		if(wx != null) {
 		    Edge alt = new Edge(vx, wx, G.weight(vx, wx));
 		    if(min == null || alt.getWeight() < min.getWeight())
 			min = alt;
 		} // O(V^2)
 	    } // O(V^3)
-	    visit[min.getVf()] = true;
-	    visitedSet.add(min.getVf());
-	    MST.addEdge(min);
+	    visited.add(min.getVf());
+	    super.addEdge(min); // Adds the new Edge to the MST an also adds its weight to the total
 	}
     }
 
-    public UndirectedGraph getMST() {
-	return this.MST;
-    }
-
-    private Integer nearestUnvisitedVertex(Integer[] adj, boolean[] vis) {
+    private Integer nearestUnvisitedVertex(Integer[] adj, Set<Integer> vis) {
 	/*
 	 * Devuelve el indice del nodo con menor distancia que aún no haya sido
 	 * visitado, null si todos fueron visitados. O(V)
@@ -49,7 +40,7 @@ public class Prim {
 
 	Integer idx = null;
 	for(int i = 0; i < adj.length; i++) {
-	    if(adj[i] != null && !vis[i]) {
+	    if(adj[i] != null && !vis.contains(i)) {
 		idx = i;
 		break;
 	    }
@@ -57,7 +48,7 @@ public class Prim {
 	if(idx == null)
 	    return null;
 	for(int i = idx; i < adj.length; i++) {
-	    if(adj[i] != null && adj[i] < adj[idx] && !vis[i])
+	    if(adj[i] != null && adj[i] < adj[idx] && !vis.contains(i))
 		idx = i;
 	}
 	return idx;

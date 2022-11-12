@@ -12,6 +12,9 @@ public class JunitUG {
     private UndirectedGraph UG1;
     private UndirectedGraph UG2;
 
+    private UndirectedGraph MST1;
+    private UndirectedGraph MST2;
+
     @Before
     public void generateUGs() {
 	UG1 = new UndirectedGraph(new Integer[][] { { null, 7, 3, null },
@@ -34,6 +37,23 @@ public class JunitUG {
 	UG2.addEdge(7, 8, 7);
     }
 
+    @Before
+    public void generateMSTs() {
+	MST1 = new UndirectedGraph(new Integer[][] { { null, null, 3, null },
+		{ null, null, 2, 2 }, { 3, 2, null, null }, { null, 2, null, null } });
+
+	MST2 = new UndirectedGraph(9);
+
+	MST2.addEdge(0, 1, 4);
+	MST2.addEdge(0, 7, 8);
+	MST2.addEdge(2, 3, 7);
+	MST2.addEdge(2, 5, 4);
+	MST2.addEdge(2, 8, 2);
+	MST2.addEdge(3, 4, 9);
+	MST2.addEdge(5, 6, 2);
+	MST2.addEdge(6, 7, 1);
+    }
+
     @Test
     public void weights() {
 	Assert.assertEquals(Integer.valueOf(7), UG1.weight(0, 1));
@@ -49,22 +69,11 @@ public class JunitUG {
 	Prim pr1 = new Prim(UG1);
 	Prim pr2 = new Prim(UG2);
 
-	Assert.assertTrue(pr1.getMST().equals(new UndirectedGraph(new Integer[][] {
-		{ null, null, 3, null }, { null, null, 2, 2 }, { 3, 2, null, null },
-		{ null, 2, null, null } })));
+	Assert.assertTrue(pr1.getMST().equals(MST1));
+	Assert.assertEquals(7, pr1.getTotalWeight());
 
-	UndirectedGraph mstUG2 = new UndirectedGraph(UG2.order);
-
-	mstUG2.addEdge(0, 1, 4);
-	mstUG2.addEdge(0, 7, 8);
-	mstUG2.addEdge(2, 3, 7);
-	mstUG2.addEdge(2, 5, 4);
-	mstUG2.addEdge(2, 8, 2);
-	mstUG2.addEdge(3, 4, 9);
-	mstUG2.addEdge(5, 6, 2);
-	mstUG2.addEdge(6, 7, 1);
-
-	Assert.assertTrue(pr2.getMST().equals(mstUG2));
+	Assert.assertTrue(pr2.getMST().equals(MST2));
+	Assert.assertEquals(37, pr2.getTotalWeight());
     }
 
 }
