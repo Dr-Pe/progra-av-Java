@@ -1,5 +1,6 @@
 package algorithms;
 
+// TODO: Implementar WQUPC
 public class DisjointSet {
     /*
      * Implementación Quick-Find de un set disjunto para algoritmo de Union-Find
