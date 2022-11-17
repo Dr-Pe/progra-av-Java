@@ -1,4 +1,4 @@
-package algorithms;
+package disjointset;
 
 // TODO: Implementar WQUPC
 public class DisjointSet {
