@@ -20,7 +20,7 @@ public class Resolucion {
 
     public static void main(String[] args) {
 
-	Archivo ar = new Archivo("caso6_fatiga_lineal");
+	Archivo ar = new Archivo("caso0_input_minimo");
 
 	Resolucion r = ar.leerArchivo();
 
@@ -38,11 +38,6 @@ public class Resolucion {
     }
 
     public void resolver() {
-	if(G.orden == 1) {
-	    posiblesRaiz.add(0);
-	    return;
-	}
-
 	buscarPosiblesRaiz();    // O(V^2)
 	if(posiblesRaiz.size() != 1)
 	    esArbol = false;
