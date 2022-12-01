@@ -3,12 +3,12 @@ package algorithms;
 import graphs.Edge;
 import graphs.UndirectedGraph;
 
-public abstract class MinimumSpanningTreeAlgorithm {
+public abstract class MSTAlgorithm {
 
     protected UndirectedGraph MST;
     protected int totalWeight;
 
-    protected MinimumSpanningTreeAlgorithm(UndirectedGraph G) {
+    protected MSTAlgorithm(UndirectedGraph G) {
 	this.MST = new UndirectedGraph(G.order);
 	this.totalWeight = 0;
     }

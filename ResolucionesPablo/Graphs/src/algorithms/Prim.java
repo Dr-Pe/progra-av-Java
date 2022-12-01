@@ -6,7 +6,7 @@ import java.util.Set;
 import graphs.Edge;
 import graphs.UndirectedGraph;
 
-public class Prim extends MinimumSpanningTreeAlgorithm {
+public class Prim extends MSTAlgorithm {
 
     public Prim(UndirectedGraph G) {
 	super(G); // Creates an empy MST Graph the same size as G
